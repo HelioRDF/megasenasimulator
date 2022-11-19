@@ -1,0 +1,18 @@
+@media(max-width: 650px) {
+    h1 {
+        font-size: 30px;
+    }
+    #info {
+        width: 90% !important;
+    }
+    #mainHtml {
+        width: 95% !important;
+        margin: auto;
+        font-family: emoji;
+        text-align: center;
+    }
+    .cartaoMega {
+        margin: auto;
+        display: flow-root;
+    }
+}

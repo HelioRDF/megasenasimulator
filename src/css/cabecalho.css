@@ -1,0 +1,12 @@
+#corpoCabecalho {
+    background-color: darkslategrey;
+    width: 100%;
+    height: 100px;
+}
+
+#logoTxt {
+    color: white;
+    font-size: 32px;
+    margin: 25px auto auto 10%;
+    font-family: auto;
+ }

@@ -1,0 +1,59 @@
+#mainHtml {
+    width: 80%;
+    margin: 3% auto;
+    font-family: emoji;
+}
+
+#titulo {
+    display: inline-block;
+    background-color: #155a4a;
+    width: 100%;
+}
+
+#tituloLoto {
+    display: inline-block;
+    background-color: #500740;
+    width: 100%;
+}
+
+#interno {
+    width: 98%;
+}
+
+#labelMegasena {
+    color: #fff;
+    font-size: 28px;
+    vertical-align: middle;
+    margin: auto;
+}
+
+#dadosJogo {
+    margin-top: 20px;
+    background-color: currentColor;
+}
+
+#valorDoJogo {
+    color: lavender;
+    margin: auto;
+}
+
+#numerosSelecionados {
+    color: lavender;
+    margin: auto;
+}
+
+#caixaComdados {
+    padding: 5px;
+}
+
+#info {
+    width: 50%;
+}
+
+#resumoSorteio {
+    color: #2271e8;
+}
+
+#modeloCartela {
+    display: none;
+}
