@@ -1,78 +1,19 @@
-function ajustarData(data) {
-    const newData = new Date(data);
-    const resultado = newData.getDay() + "/" + newData.getMonth() + "/" + newData.getFullYear();
-    return resultado;
+
+function retornarJsonCompleto() {
+    return jsonObj;
 }
 
-function ajustarValor(valor) {
-    const formatado = valor.toLocaleString('pt-BR',
-        {
-            style: 'currency', currency: 'BRL'
+function retornaJsonCustomizado() {
+    let novoObjeto = [];
+    jsonObj.forEach(element => {
+        let { numero, dezenas, premiacao, arrecadacaoTotal, data
+        } = element;
+        novoObjeto.push({
+            numero, dezenas, premiacao, arrecadacaoTotal, data
         });
-    return formatado;
+    });
+    return novoObjeto;
 }
-
-function buscarResultado(concurso) {
-    var url = `https://apiloterias.com.br/app/resultado?loteria=megasena&token=tfgSQN3nqLVe6XY&concurso=${concurso}`;
-    var newObj;
-
-    fetch(url).then((resp) => resp.json()).then((json) => newObj = {
-        "numero": JSON.stringify(json.numero_concurso),
-        "data": ajustarData(json.data_concurso),
-        "cidade": json.local_realizacao,
-        "local": json.local_realizacao,
-        "valorAcumulado": ajustarValor(json.valor_acumulado),
-        "dezenas": json.dezenas,
-        "premiacao": {
-            "sena": {
-                "ganhadores": JSON.stringify(json.premiacao[
-                    0
-                ].quantidade_ganhadores),
-                "valorPago": ajustarValor(json.premiacao[0].valor_total),
-            },
-            "quina": {
-                "ganhadores": JSON.stringify(json.premiacao[
-                    1
-                ].quantidade_ganhadores),
-                "valorPago": ajustarValor(json.premiacao[
-                    1
-                ].valor_total),
-            },
-            "quadra": {
-                "ganhadores": JSON.stringify(json.premiacao[
-                    2
-                ].quantidade_ganhadores),
-                "valorPago": ajustarValor(json.premiacao[
-                    2
-                ].valor_total),
-            }
-        },
-        "arrecadacaoTotal": ajustarValor(json.arrecadacao_total),
-        "proximoConcurso": {
-            "data": "01/01/2999",
-            "valorEstimado": "99.999.999,00"
-        },
-        "valorAcumuladoFinalCinco": "2.030.190,42",
-        "valorAcumuladoMegaVirada": "2.208.593,74"
-    }).then((obj) => console.log(JSON.stringify(obj)))
-}
-
-var obj = [];
-
-var numInicial = 2500;
-var numFinal = 2551;
-//iniciar();
-function iniciar() {
-    setTimeout(() => {
-        numInicial++;
-        if (numInicial <= numFinal) {
-            buscarResultado(numInicial);
-            iniciar();
-        }
-    },
-        3000);
-}
-
 
 var jsonObj = [
     {
@@ -90291,79 +90232,1840 @@ var jsonObj = [
         "valorAcumuladoFinalCinco": "2.030.190,42",
         "valorAcumuladoMegaVirada": "2.208.593,74"
     },
-
-    { "numero": "2501", "data": "6/6/2022", "cidade": "SÃO PAULO, SP", "local": "SÃO PAULO, SP", "valorAcumulado": "R$ 3.899.470,54", "dezenas": ["11", "27", "32", "40", "58", "59"], "premiacao": { "sena": { "ganhadores": "0", "valorPago": "R$ 0,00" }, "quina": { "ganhadores": "30", "valorPago": "R$ 70.561,85" }, "quadra": { "ganhadores": "2331", "valorPago": "R$ 1.297,33" } }, "arrecadacaoTotal": "R$ 36.715.585,50", "proximoConcurso": { "data": "01/01/2999", "valorEstimado": "99.999.999,00" }, "valorAcumuladoFinalCinco": "2.030.190,42", "valorAcumuladoMegaVirada": "2.208.593,74" },
-    { "numero": "2502", "data": "3/6/2022", "cidade": "SÃO PAULO, SP", "local": "SÃO PAULO, SP", "valorAcumulado": "R$ 8.248.378,04", "dezenas": ["16", "20", "21", "39", "44", "55"], "premiacao": { "sena": { "ganhadores": "0", "valorPago": "R$ 0,00" }, "quina": { "ganhadores": "103", "valorPago": "R$ 22.920,73" }, "quadra": { "ganhadores": "2914", "valorPago": "R$ 1.157,38" } }, "arrecadacaoTotal": "R$ 40.947.273,00", "proximoConcurso": { "data": "01/01/2999", "valorEstimado": "99.999.999,00" }, "valorAcumuladoFinalCinco": "2.030.190,42", "valorAcumuladoMegaVirada": "2.208.593,74" },
-    { "numero": "2503", "data": "6/6/2022", "cidade": "SÃO PAULO, SP", "local": "SÃO PAULO, SP", "valorAcumulado": "R$ 0,00", "dezenas": ["03", "14", "16", "38", "43", "45"], "premiacao": { "sena": { "ganhadores": "1", "valorPago": "R$ 13.748.083,57" }, "quina": { "ganhadores": "91", "valorPago": "R$ 32.808,29" }, "quadra": { "ganhadores": "5194", "valorPago": "R$ 821,15" } }, "arrecadacaoTotal": "R$ 51.782.647,50", "proximoConcurso": { "data": "01/01/2999", "valorEstimado": "99.999.999,00" }, "valorAcumuladoFinalCinco": "2.030.190,42", "valorAcumuladoMegaVirada": "2.208.593,74" },
-    { "numero": "2504", "data": "3/6/2022", "cidade": "SÃO PAULO,  SP", "local": "SÃO PAULO,  SP", "valorAcumulado": "R$ 17.766.858,97", "dezenas": ["14", "33", "41", "42", "44", "55"], "premiacao": { "sena": { "ganhadores": "0", "valorPago": "R$ 0,00" }, "quina": { "ganhadores": "39", "valorPago": "R$ 46.871,70" }, "quadra": { "ganhadores": "2885", "valorPago": "R$ 905,17" } }, "arrecadacaoTotal": "R$ 31.705.497,00", "proximoConcurso": { "data": "01/01/2999", "valorEstimado": "99.999.999,00" }, "valorAcumuladoFinalCinco": "2.030.190,42", "valorAcumuladoMegaVirada": "2.208.593,74" },
-    { "numero": "2505", "data": "6/6/2022", "cidade": "SÃO PAULO, SP", "local": "SÃO PAULO, SP", "valorAcumulado": "R$ 0,00", "dezenas": ["03", "05", "19", "26", "43", "51"], "premiacao": { "sena": { "ganhadores": "1", "valorPago": "R$ 24.271.229,51" }, "quina": { "ganhadores": "108", "valorPago": "R$ 32.693,92" }, "quadra": { "ganhadores": "6977", "valorPago": "R$ 722,97" } }, "arrecadacaoTotal": "R$ 61.242.102,00", "proximoConcurso": { "data": "01/01/2999", "valorEstimado": "99.999.999,00" }, "valorAcumuladoFinalCinco": "2.030.190,42", "valorAcumuladoMegaVirada": "2.208.593,74" },
-    { "numero": "2506", "data": "2/7/2022", "cidade": "SÃO PAULO, SP", "local": "SÃO PAULO, SP", "valorAcumulado": "R$ 2.239.676,89", "dezenas": ["21", "22", "29", "34", "40", "44"], "premiacao": { "sena": { "ganhadores": "0", "valorPago": "R$ 0,00" }, "quina": { "ganhadores": "12", "valorPago": "R$ 101.318,72" }, "quadra": { "ganhadores": "1145", "valorPago": "R$ 1.516,93" } }, "arrecadacaoTotal": "R$ 21.087.747,00", "proximoConcurso": { "data": "01/01/2999", "valorEstimado": "99.999.999,00" }, "valorAcumuladoFinalCinco": "2.030.190,42", "valorAcumuladoMegaVirada": "2.208.593,74" },
-    { "numero": "2507", "data": "4/7/2022", "cidade": "SÃO PAULO, SP", "local": "SÃO PAULO, SP", "valorAcumulado": "R$ 0,00", "dezenas": ["04", "06", "12", "34", "35", "53"], "premiacao": { "sena": { "ganhadores": "1", "valorPago": "R$ 5.543.989,92" }, "quina": { "ganhadores": "47", "valorPago": "R$ 38.165,32" }, "quadra": { "ganhadores": "3385", "valorPago": "R$ 757,02" } }, "arrecadacaoTotal": "R$ 31.111.861,50", "proximoConcurso": { "data": "01/01/2999", "valorEstimado": "99.999.999,00" }, "valorAcumuladoFinalCinco": "2.030.190,42", "valorAcumuladoMegaVirada": "2.208.593,74" },
-    { "numero": "2508", "data": "6/7/2022", "cidade": "SÃO PAULO, SP", "local": "SÃO PAULO, SP", "valorAcumulado": "R$ 3.435.428,42", "dezenas": ["41", "45", "48", "51", "53", "58"], "premiacao": { "sena": { "ganhadores": "0", "valorPago": "R$ 0,00" }, "quina": { "ganhadores": "26", "valorPago": "R$ 71.728,72" }, "quadra": { "ganhadores": "1510", "valorPago": "R$ 1.764,37" } }, "arrecadacaoTotal": "R$ 32.346.382,50", "proximoConcurso": { "data": "01/01/2999", "valorEstimado": "99.999.999,00" }, "valorAcumuladoFinalCinco": "2.030.190,42", "valorAcumuladoMegaVirada": "2.208.593,74" },
-    { "numero": "2509", "data": "3/7/2022", "cidade": "SÃO PAULO,  SP", "local": "SÃO PAULO,  SP", "valorAcumulado": "R$ 20.074.834,59", "dezenas": ["08", "37", "39", "50", "59", "60"], "premiacao": { "sena": { "ganhadores": "0", "valorPago": "R$ 0,00" }, "quina": { "ganhadores": "47", "valorPago": "R$ 48.983,97" }, "quadra": { "ganhadores": "2560", "valorPago": "R$ 1.284,73" } }, "arrecadacaoTotal": "R$ 39.931.078,50", "proximoConcurso": { "data": "01/01/2999", "valorEstimado": "99.999.999,00" }, "valorAcumuladoFinalCinco": "2.030.190,42", "valorAcumuladoMegaVirada": "2.208.593,74" },
-    { "numero": "2510", "data": "6/7/2022", "cidade": "SÃO PAULO, SP", "local": "SÃO PAULO, SP", "valorAcumulado": "R$ 0,00", "dezenas": ["08", "13", "25", "32", "44", "57"], "premiacao": { "sena": { "ganhadores": "4", "valorPago": "R$ 6.670.155,67" }, "quina": { "ganhadores": "242", "valorPago": "R$ 14.818,18" }, "quadra": { "ganhadores": "10296", "valorPago": "R$ 497,55" } }, "arrecadacaoTotal": "R$ 62.197.002,00", "proximoConcurso": { "data": "01/01/2999", "valorEstimado": "99.999.999,00" }, "valorAcumuladoFinalCinco": "2.030.190,42", "valorAcumuladoMegaVirada": "2.208.593,74" },
-    { "numero": "2511", "data": "3/7/2022", "cidade": "SÃO PAULO, SP", "local": "SÃO PAULO, SP", "valorAcumulado": "R$ 3.191.408,35", "dezenas": ["04", "10", "15", "39", "41", "49"], "premiacao": { "sena": { "ganhadores": "0", "valorPago": "R$ 0,00" }, "quina": { "ganhadores": "31", "valorPago": "R$ 55.886,42" }, "quadra": { "ganhadores": "2031", "valorPago": "R$ 1.218,59" } }, "arrecadacaoTotal": "R$ 30.048.804,00", "proximoConcurso": { "data": "01/01/2999", "valorEstimado": "99.999.999,00" }, "valorAcumuladoFinalCinco": "2.030.190,42", "valorAcumuladoMegaVirada": "2.208.593,74" },
-    { "numero": "2512", "data": "6/7/2022", "cidade": "SÃO PAULO, SP", "local": "SÃO PAULO, SP", "valorAcumulado": "R$ 7.821.502,90", "dezenas": ["07", "10", "34", "47", "49", "52"], "premiacao": { "sena": { "ganhadores": "0", "valorPago": "R$ 0,00" }, "quina": { "ganhadores": "81", "valorPago": "R$ 31.030,62" }, "quadra": { "ganhadores": "4382", "valorPago": "R$ 819,41" } }, "arrecadacaoTotal": "R$ 43.594.798,50", "proximoConcurso": { "data": "01/01/2999", "valorEstimado": "99.999.999,00" }, "valorAcumuladoFinalCinco": "2.030.190,42", "valorAcumuladoMegaVirada": "2.208.593,74" },
-    { "numero": "2513", "data": "3/7/2022", "cidade": "SÃO PAULO, SP", "local": "SÃO PAULO, SP", "valorAcumulado": "R$ 12.561.383,62", "dezenas": ["13", "19", "21", "35", "46", "50"], "premiacao": { "sena": { "ganhadores": "0", "valorPago": "R$ 0,00" }, "quina": { "ganhadores": "62", "valorPago": "R$ 41.501,26" }, "quadra": { "ganhadores": "3823", "valorPago": "R$ 961,50" } }, "arrecadacaoTotal": "R$ 44.628.493,50", "proximoConcurso": { "data": "01/01/2999", "valorEstimado": "99.999.999,00" }, "valorAcumuladoFinalCinco": "2.030.190,42", "valorAcumuladoMegaVirada": "2.208.593,74" },
-    { "numero": "2514", "data": "6/7/2022", "cidade": "SÃO PAULO,  SP", "local": "SÃO PAULO,  SP", "valorAcumulado": "R$ 33.953.898,66", "dezenas": ["05", "15", "24", "34", "45", "52"], "premiacao": { "sena": { "ganhadores": "0", "valorPago": "R$ 0,00" }, "quina": { "ganhadores": "52", "valorPago": "R$ 59.901,15" }, "quadra": { "ganhadores": "4477", "valorPago": "R$ 993,92" } }, "arrecadacaoTotal": "R$ 54.025.366,50", "proximoConcurso": { "data": "01/01/2999", "valorEstimado": "99.999.999,00" }, "valorAcumuladoFinalCinco": "2.030.190,42", "valorAcumuladoMegaVirada": "2.208.593,74" },
-    { "numero": "2515", "data": "3/7/2022", "cidade": "SÃO PAULO, SP", "local": "SÃO PAULO, SP", "valorAcumulado": "R$ 40.890.828,40", "dezenas": ["03", "12", "19", "41", "45", "54"], "premiacao": { "sena": { "ganhadores": "0", "valorPago": "R$ 0,00" }, "quina": { "ganhadores": "97", "valorPago": "R$ 38.822,29" }, "quadra": { "ganhadores": "6861", "valorPago": "R$ 784,09" } }, "arrecadacaoTotal": "R$ 65.314.876,50", "proximoConcurso": { "data": "01/01/2999", "valorEstimado": "99.999.999,00" }, "valorAcumuladoFinalCinco": "2.030.190,42", "valorAcumuladoMegaVirada": "2.208.593,74" },
-    { "numero": "2516", "data": "6/8/2022", "cidade": "SÃO PAULO, SP", "local": "SÃO PAULO, SP", "valorAcumulado": "R$ 49.384.545,61", "dezenas": ["08", "17", "49", "51", "52", "53"], "premiacao": { "sena": { "ganhadores": "0", "valorPago": "R$ 0,00" }, "quina": { "ganhadores": "94", "valorPago": "R$ 49.051,86" }, "quadra": { "ganhadores": "6665", "valorPago": "R$ 988,29" } }, "arrecadacaoTotal": "R$ 79.972.857,00", "proximoConcurso": { "data": "01/01/2999", "valorEstimado": "99.999.999,00" }, "valorAcumuladoFinalCinco": "2.030.190,42", "valorAcumuladoMegaVirada": "2.208.593,74" },
-    { "numero": "2517", "data": "4/8/2022", "cidade": "SÃO PAULO, SP", "local": "SÃO PAULO, SP", "valorAcumulado": "R$ 57.698.210,35", "dezenas": ["01", "05", "06", "16", "22", "39"], "premiacao": { "sena": { "ganhadores": "0", "valorPago": "R$ 0,00" }, "quina": { "ganhadores": "116", "valorPago": "R$ 38.906,31" }, "quadra": { "ganhadores": "8240", "valorPago": "R$ 782,44" } }, "arrecadacaoTotal": "R$ 78.277.567,50", "proximoConcurso": { "data": "01/01/2999", "valorEstimado": "99.999.999,00" }, "valorAcumuladoFinalCinco": "2.030.190,42", "valorAcumuladoMegaVirada": "2.208.593,74" },
-    { "numero": "2518", "data": "6/8/2022", "cidade": "SÃO PAULO, SP", "local": "SÃO PAULO, SP", "valorAcumulado": "R$ 65.865.634,54", "dezenas": ["03", "22", "23", "44", "53", "60"], "premiacao": { "sena": { "ganhadores": "0", "valorPago": "R$ 0,00" }, "quina": { "ganhadores": "112", "valorPago": "R$ 39.587,01" }, "quadra": { "ganhadores": "7288", "valorPago": "R$ 869,08" } }, "arrecadacaoTotal": "R$ 76.900.635,00", "proximoConcurso": { "data": "01/01/2999", "valorEstimado": "99.999.999,00" }, "valorAcumuladoFinalCinco": "2.030.190,42", "valorAcumuladoMegaVirada": "2.208.593,74" },
-    { "numero": "2519", "data": "2/8/2022", "cidade": "SÃO PAULO,  SP", "local": "SÃO PAULO,  SP", "valorAcumulado": "R$ 98.323.155,10", "dezenas": ["03", "08", "20", "36", "38", "57"], "premiacao": { "sena": { "ganhadores": "0", "valorPago": "R$ 0,00" }, "quina": { "ganhadores": "88", "valorPago": "R$ 46.964,83" }, "quadra": { "ganhadores": "6736", "valorPago": "R$ 876,50" } }, "arrecadacaoTotal": "R$ 71.682.754,50", "proximoConcurso": { "data": "01/01/2999", "valorEstimado": "99.999.999,00" }, "valorAcumuladoFinalCinco": "2.030.190,42", "valorAcumuladoMegaVirada": "2.208.593,74" },
-    { "numero": "2520", "data": "4/8/2022", "cidade": "SÃO PAULO, SP", "local": "SÃO PAULO, SP", "valorAcumulado": "R$ 110.015.734,03", "dezenas": ["02", "17", "22", "41", "58", "60"], "premiacao": { "sena": { "ganhadores": "0", "valorPago": "R$ 0,00" }, "quina": { "ganhadores": "160", "valorPago": "R$ 39.671,25" }, "quadra": { "ganhadores": "10126", "valorPago": "R$ 895,48" } }, "arrecadacaoTotal": "R$ 110.091.838,50", "proximoConcurso": { "data": "01/01/2999", "valorEstimado": "99.999.999,00" }, "valorAcumuladoFinalCinco": "2.030.190,42", "valorAcumuladoMegaVirada": "2.208.593,74" },
-    { "numero": "2521", "data": "6/8/2022", "cidade": "SÃO PAULO, SP", "local": "SÃO PAULO, SP", "valorAcumulado": "R$ 124.667.917,23", "dezenas": ["23", "28", "33", "38", "55", "59"], "premiacao": { "sena": { "ganhadores": "0", "valorPago": "R$ 0,00" }, "quina": { "ganhadores": "189", "valorPago": "R$ 42.084,88" }, "quadra": { "ganhadores": "12204", "valorPago": "R$ 931,08" } }, "arrecadacaoTotal": "R$ 137.958.084,00", "proximoConcurso": { "data": "01/01/2999", "valorEstimado": "99.999.999,00" }, "valorAcumuladoFinalCinco": "2.030.190,42", "valorAcumuladoMegaVirada": "2.208.593,74" },
-    { "numero": "2522", "data": "3/8/2022", "cidade": "SÃO PAULO, SP", "local": "SÃO PAULO, SP", "valorAcumulado": "R$ 144.922.165,99", "dezenas": ["04", "05", "25", "32", "39", "40"], "premiacao": { "sena": { "ganhadores": "0", "valorPago": "R$ 0,00" }, "quina": { "ganhadores": "202", "valorPago": "R$ 54.431,51" }, "quadra": { "ganhadores": "17799", "valorPago": "R$ 882,48" } }, "arrecadacaoTotal": "R$ 190.704.505,50", "proximoConcurso": { "data": "01/01/2999", "valorEstimado": "99.999.999,00" }, "valorAcumuladoFinalCinco": "2.030.190,42", "valorAcumuladoMegaVirada": "2.208.593,74" },
-    { "numero": "2523", "data": "6/8/2022", "cidade": "SÃO PAULO, SP", "local": "SÃO PAULO, SP", "valorAcumulado": "R$ 169.218.785,10", "dezenas": ["01", "10", "27", "36", "37", "45"], "premiacao": { "sena": { "ganhadores": "0", "valorPago": "R$ 0,00" }, "quina": { "ganhadores": "294", "valorPago": "R$ 44.862,56" }, "quadra": { "ganhadores": "20572", "valorPago": "R$ 915,91" } }, "arrecadacaoTotal": "R$ 228.765.568,50", "proximoConcurso": { "data": "01/01/2999", "valorEstimado": "99.999.999,00" }, "valorAcumuladoFinalCinco": "2.030.190,42", "valorAcumuladoMegaVirada": "2.208.593,74" },
-    { "numero": "2524", "data": "3/8/2022", "cidade": "SÃO PAULO,  SP", "local": "SÃO PAULO,  SP", "valorAcumulado": "R$ 267.006.265,85", "dezenas": ["03", "20", "22", "37", "41", "43"], "premiacao": { "sena": { "ganhadores": "0", "valorPago": "R$ 0,00" }, "quina": { "ganhadores": "404", "valorPago": "R$ 43.914,62" }, "quadra": { "ganhadores": "30194", "valorPago": "R$ 839,40" } }, "arrecadacaoTotal": "R$ 307.715.733,00", "proximoConcurso": { "data": "01/01/2999", "valorEstimado": "99.999.999,00" }, "valorAcumuladoFinalCinco": "2.030.190,42", "valorAcumuladoMegaVirada": "2.208.593,74" },
-    { "numero": "2525", "data": "6/9/2022", "cidade": "SÃO PAULO, SP", "local": "SÃO PAULO, SP", "valorAcumulado": "R$ 0,00", "dezenas": ["04", "13", "21", "26", "47", "51"], "premiacao": { "sena": { "ganhadores": "2", "valorPago": "R$ 158.926.894,27" }, "quina": { "ganhadores": "814", "valorPago": "R$ 33.910,24" }, "quadra": { "ganhadores": "52760", "valorPago": "R$ 747,39" } }, "arrecadacaoTotal": "R$ 478.756.422,00", "proximoConcurso": { "data": "01/01/2999", "valorEstimado": "99.999.999,00" }, "valorAcumuladoFinalCinco": "2.030.190,42", "valorAcumuladoMegaVirada": "2.208.593,74" },
-    { "numero": "2526", "data": "3/9/2022", "cidade": "SÃO PAULO, SP", "local": "SÃO PAULO, SP", "valorAcumulado": "R$ 4.234.172,81", "dezenas": ["02", "16", "24", "38", "43", "59"], "premiacao": { "sena": { "ganhadores": "0", "valorPago": "R$ 0,00" }, "quina": { "ganhadores": "107", "valorPago": "R$ 21.481,79" }, "quadra": { "ganhadores": "4518", "valorPago": "R$ 726,79" } }, "arrecadacaoTotal": "R$ 39.866.985,00", "proximoConcurso": { "data": "01/01/2999", "valorEstimado": "99.999.999,00" }, "valorAcumuladoFinalCinco": "2.030.190,42", "valorAcumuladoMegaVirada": "2.208.593,74" },
-    { "numero": "2527", "data": "6/9/2022", "cidade": "SÃO PAULO, SP", "local": "SÃO PAULO, SP", "valorAcumulado": "R$ 10.242.650,28", "dezenas": ["08", "19", "29", "38", "48", "56"], "premiacao": { "sena": { "ganhadores": "0", "valorPago": "R$ 0,00" }, "quina": { "ganhadores": "80", "valorPago": "R$ 40.771,81" }, "quadra": { "ganhadores": "4182", "valorPago": "R$ 1.114,21" } }, "arrecadacaoTotal": "R$ 56.573.005,50", "proximoConcurso": { "data": "01/01/2999", "valorEstimado": "99.999.999,00" }, "valorAcumuladoFinalCinco": "2.030.190,42", "valorAcumuladoMegaVirada": "2.208.593,74" },
-    { "numero": "2528", "data": "4/9/2022", "cidade": "SÃO PAULO, SP", "local": "SÃO PAULO, SP", "valorAcumulado": "R$ 16.470.907,98", "dezenas": ["04", "15", "22", "53", "56", "60"], "premiacao": { "sena": { "ganhadores": "0", "valorPago": "R$ 0,00" }, "quina": { "ganhadores": "64", "valorPago": "R$ 52.828,97" }, "quadra": { "ganhadores": "4684", "valorPago": "R$ 1.031,18" } }, "arrecadacaoTotal": "R$ 58.642.353,00", "proximoConcurso": { "data": "01/01/2999", "valorEstimado": "99.999.999,00" }, "valorAcumuladoFinalCinco": "2.030.190,42", "valorAcumuladoMegaVirada": "2.208.593,74" },
-    { "numero": "2529", "data": "6/9/2022", "cidade": "SÃO PAULO,  SP", "local": "SÃO PAULO,  SP", "valorAcumulado": "R$ 69.851.771,07", "dezenas": ["03", "05", "32", "56", "57", "59"], "premiacao": { "sena": { "ganhadores": "0", "valorPago": "R$ 0,00" }, "quina": { "ganhadores": "84", "valorPago": "R$ 43.914,37" }, "quadra": { "ganhadores": "5632", "valorPago": "R$ 935,67" } }, "arrecadacaoTotal": "R$ 63.980.140,50", "proximoConcurso": { "data": "01/01/2999", "valorEstimado": "99.999.999,00" }, "valorAcumuladoFinalCinco": "2.030.190,42", "valorAcumuladoMegaVirada": "2.208.593,74" },
-    { "numero": "2530", "data": "2/9/2022", "cidade": "SÃO PAULO, SP", "local": "SÃO PAULO, SP", "valorAcumulado": "R$ 76.812.987,97", "dezenas": ["14", "17", "18", "28", "30", "44"], "premiacao": { "sena": { "ganhadores": "0", "valorPago": "R$ 0,00" }, "quina": { "ganhadores": "80", "valorPago": "R$ 47.236,83" }, "quadra": { "ganhadores": "6922", "valorPago": "R$ 779,90" } }, "arrecadacaoTotal": "R$ 65.543.553,00", "proximoConcurso": { "data": "01/01/2999", "valorEstimado": "99.999.999,00" }, "valorAcumuladoFinalCinco": "2.030.190,42", "valorAcumuladoMegaVirada": "2.208.593,74" },
-    { "numero": "2531", "data": "4/9/2022", "cidade": "SÃO PAULO, SP", "local": "SÃO PAULO, SP", "valorAcumulado": "R$ 86.434.034,75", "dezenas": ["01", "05", "18", "49", "55", "56"], "premiacao": { "sena": { "ganhadores": "0", "valorPago": "R$ 0,00" }, "quina": { "ganhadores": "107", "valorPago": "R$ 48.811,72" }, "quadra": { "ganhadores": "7174", "valorPago": "R$ 1.040,03" } }, "arrecadacaoTotal": "R$ 90.587.263,50", "proximoConcurso": { "data": "01/01/2999", "valorEstimado": "99.999.999,00" }, "valorAcumuladoFinalCinco": "2.030.190,42", "valorAcumuladoMegaVirada": "2.208.593,74" },
-    { "numero": "2532", "data": "6/9/2022", "cidade": "SÃO PAULO, SP", "local": "SÃO PAULO, SP", "valorAcumulado": "R$ 99.395.922,57", "dezenas": ["10", "14", "17", "18", "23", "30"], "premiacao": { "sena": { "ganhadores": "0", "valorPago": "R$ 0,00" }, "quina": { "ganhadores": "259", "valorPago": "R$ 27.167,77" }, "quadra": { "ganhadores": "18616", "valorPago": "R$ 539,96" } }, "arrecadacaoTotal": "R$ 122.043.055,50", "proximoConcurso": { "data": "01/01/2999", "valorEstimado": "99.999.999,00" }, "valorAcumuladoFinalCinco": "2.030.190,42", "valorAcumuladoMegaVirada": "2.208.593,74" },
-    { "numero": "2533", "data": "3/9/2022", "cidade": "SÃO PAULO, SP", "local": "SÃO PAULO, SP", "valorAcumulado": "R$ 114.116.759,04", "dezenas": ["17", "18", "20", "37", "45", "53"], "premiacao": { "sena": { "ganhadores": "0", "valorPago": "R$ 0,00" }, "quina": { "ganhadores": "134", "valorPago": "R$ 59.636,65" }, "quadra": { "ganhadores": "11048", "valorPago": "R$ 1.033,32" } }, "arrecadacaoTotal": "R$ 138.604.491,00", "proximoConcurso": { "data": "01/01/2999", "valorEstimado": "99.999.999,00" }, "valorAcumuladoFinalCinco": "2.030.190,42", "valorAcumuladoMegaVirada": "2.208.593,74" },
-    { "numero": "2534", "data": "6/9/2022", "cidade": "SÃO PAULO, SP", "local": "SÃO PAULO, SP", "valorAcumulado": "R$ 38.792.396,04", "dezenas": ["28", "36", "39", "44", "56", "60"], "premiacao": { "sena": { "ganhadores": "1", "valorPago": "R$ 131.566.946,59" }, "quina": { "ganhadores": "176", "valorPago": "R$ 53.823,63" }, "quadra": { "ganhadores": "12797", "valorPago": "R$ 1.057,49" } }, "arrecadacaoTotal": "R$ 164.302.780,50", "proximoConcurso": { "data": "01/01/2999", "valorEstimado": "99.999.999,00" }, "valorAcumuladoFinalCinco": "2.030.190,42", "valorAcumuladoMegaVirada": "2.208.593,74" },
-    { "numero": "2535", "data": "4/10/2022", "cidade": "SÃO PAULO, SP", "local": "SÃO PAULO, SP", "valorAcumulado": "R$ 45.935.605,33", "dezenas": ["01", "03", "24", "37", "51", "56"], "premiacao": { "sena": { "ganhadores": "0", "valorPago": "R$ 0,00" }, "quina": { "ganhadores": "59", "valorPago": "R$ 65.724,45" }, "quadra": { "ganhadores": "5885", "valorPago": "R$ 941,31" } }, "arrecadacaoTotal": "R$ 67.257.108,00", "proximoConcurso": { "data": "01/01/2999", "valorEstimado": "99.999.999,00" }, "valorAcumuladoFinalCinco": "2.030.190,42", "valorAcumuladoMegaVirada": "2.208.593,74" },
-    { "numero": "2536", "data": "6/10/2022", "cidade": "SÃO PAULO, SP", "local": "SÃO PAULO, SP", "valorAcumulado": "R$ 54.575.161,62", "dezenas": ["09", "22", "27", "30", "33", "45"], "premiacao": { "sena": { "ganhadores": "0", "valorPago": "R$ 0,00" }, "quina": { "ganhadores": "163", "valorPago": "R$ 28.773,28" }, "quadra": { "ganhadores": "10787", "valorPago": "R$ 621,12" } }, "arrecadacaoTotal": "R$ 81.346.009,50", "proximoConcurso": { "data": "01/01/2999", "valorEstimado": "99.999.999,00" }, "valorAcumuladoFinalCinco": "2.030.190,42", "valorAcumuladoMegaVirada": "2.208.593,74" },
-    { "numero": "2537", "data": "3/10/2022", "cidade": "SÃO PAULO, SP", "local": "SÃO PAULO, SP", "valorAcumulado": "R$ 0,00", "dezenas": ["12", "24", "26", "31", "37", "48"], "premiacao": { "sena": { "ganhadores": "1", "valorPago": "R$ 64.250.536,10" }, "quina": { "ganhadores": "94", "valorPago": "R$ 55.876,02" }, "quadra": { "ganhadores": "9282", "valorPago": "R$ 808,37" } }, "arrecadacaoTotal": "R$ 91.098.787,50", "proximoConcurso": { "data": "01/01/2999", "valorEstimado": "99.999.999,00" }, "valorAcumuladoFinalCinco": "2.030.190,42", "valorAcumuladoMegaVirada": "2.208.593,74" },
-    { "numero": "2538", "data": "6/10/2022", "cidade": "SÃO PAULO, SP", "local": "SÃO PAULO, SP", "valorAcumulado": "R$ 4.837.128,77", "dezenas": ["06", "15", "19", "20", "33", "52"], "premiacao": { "sena": { "ganhadores": "0", "valorPago": "R$ 0,00" }, "quina": { "ganhadores": "45", "valorPago": "R$ 58.352,66" }, "quadra": { "ganhadores": "4693", "valorPago": "R$ 799,32" } }, "arrecadacaoTotal": "R$ 45.544.135,50", "proximoConcurso": { "data": "01/01/2999", "valorEstimado": "99.999.999,00" }, "valorAcumuladoFinalCinco": "2.030.190,42", "valorAcumuladoMegaVirada": "2.208.593,74" },
-    { "numero": "2539", "data": "3/10/2022", "cidade": "SÃO PAULO,  SP", "local": "SÃO PAULO,  SP", "valorAcumulado": "R$ 31.145.754,74", "dezenas": ["01", "23", "32", "33", "36", "59"], "premiacao": { "sena": { "ganhadores": "0", "valorPago": "R$ 0,00" }, "quina": { "ganhadores": "32", "valorPago": "R$ 75.686,31" }, "quadra": { "ganhadores": "3223", "valorPago": "R$ 1.073,51" } }, "arrecadacaoTotal": "R$ 42.007.473,00", "proximoConcurso": { "data": "01/01/2999", "valorEstimado": "99.999.999,00" }, "valorAcumuladoFinalCinco": "2.030.190,42", "valorAcumuladoMegaVirada": "2.208.593,74" },
-    { "numero": "2540", "data": "6/10/2022", "cidade": "SÃO PAULO, SP", "local": "SÃO PAULO, SP", "valorAcumulado": "R$ 38.761.752,82", "dezenas": ["02", "08", "28", "34", "41", "49"], "premiacao": { "sena": { "ganhadores": "0", "valorPago": "R$ 0,00" }, "quina": { "ganhadores": "90", "valorPago": "R$ 45.937,77" }, "quadra": { "ganhadores": "6404", "valorPago": "R$ 922,28" } }, "arrecadacaoTotal": "R$ 71.708.665,50", "proximoConcurso": { "data": "01/01/2999", "valorEstimado": "99.999.999,00" }, "valorAcumuladoFinalCinco": "2.030.190,42", "valorAcumuladoMegaVirada": "2.208.593,74" },
-    { "numero": "2541", "data": "2/10/2022", "cidade": "SÃO PAULO, SP", "local": "SÃO PAULO, SP", "valorAcumulado": "R$ 43.978.243,89", "dezenas": ["10", "28", "45", "47", "57", "59"], "premiacao": { "sena": { "ganhadores": "0", "valorPago": "R$ 0,00" }, "quina": { "ganhadores": "51", "valorPago": "R$ 55.525,68" }, "quadra": { "ganhadores": "3793", "valorPago": "R$ 1.066,55" } }, "arrecadacaoTotal": "R$ 49.116.033,00", "proximoConcurso": { "data": "01/01/2999", "valorEstimado": "99.999.999,00" }, "valorAcumuladoFinalCinco": "2.030.190,42", "valorAcumuladoMegaVirada": "2.208.593,74" },
-    { "numero": "2542", "data": "4/10/2022", "cidade": "SÃO PAULO, SP", "local": "SÃO PAULO, SP", "valorAcumulado": "R$ 49.768.134,07", "dezenas": ["12", "20", "22", "25", "26", "55"], "premiacao": { "sena": { "ganhadores": "0", "valorPago": "R$ 0,00" }, "quina": { "ganhadores": "74", "valorPago": "R$ 42.474,10" }, "quadra": { "ganhadores": "5246", "valorPago": "R$ 855,91" } }, "arrecadacaoTotal": "R$ 54.514.890,00", "proximoConcurso": { "data": "01/01/2999", "valorEstimado": "99.999.999,00" }, "valorAcumuladoFinalCinco": "2.030.190,42", "valorAcumuladoMegaVirada": "2.208.593,74" },
-    { "numero": "2543", "data": "6/10/2022", "cidade": "SÃO PAULO, SP", "local": "SÃO PAULO, SP", "valorAcumulado": "R$ 57.312.877,49", "dezenas": ["02", "05", "27", "30", "46", "53"], "premiacao": { "sena": { "ganhadores": "0", "valorPago": "R$ 0,00" }, "quina": { "ganhadores": "138", "valorPago": "R$ 29.679,12" }, "quadra": { "ganhadores": "7475", "valorPago": "R$ 782,74" }, }, "arrecadacaoTotal": "R$ 71.037.765,00", "proximoConcurso": { "data": "01/01/2999", "valorEstimado": "99.999.999,00" }, "valorAcumuladoFinalCinco": "2.030.190,42", "valorAcumuladoMegaVirada": "2.208.593,74" },
-    { "numero": "2544", "data": "3/10/2022", "cidade": "SÃO PAULO,  SP", "local": "SÃO PAULO,  SP", "valorAcumulado": "R$ 86.943.251,69", "dezenas": ["25", "38", "45", "53", "55", "56"], "premiacao": { "sena": { "ganhadores": "0", "valorPago": "R$ 0,00" }, "quina": { "ganhadores": "71", "valorPago": "R$ 61.889,52" }, "quadra": { "ganhadores": "6119", "valorPago": "R$ 1.025,88" } }, "arrecadacaoTotal": "R$ 76.213.998,00", "proximoConcurso": { "data": "01/01/2999", "valorEstimado": "99.999.999,00" }, "valorAcumuladoFinalCinco": "2.030.190,42", "valorAcumuladoMegaVirada": "2.208.593,74" },
-    { "numero": "2545", "data": "6/11/2022", "cidade": "SÃO PAULO, SP", "local": "SÃO PAULO, SP", "valorAcumulado": "R$ 98.539.178,55", "dezenas": ["20", "23", "32", "36", "39", "57"], "premiacao": { "sena": { "ganhadores": "0", "valorPago": "R$ 0,00" }, "quina": { "ganhadores": "94", "valorPago": "R$ 66.967,36" }, "quadra": { "ganhadores": "8855", "valorPago": "R$ 1.015,55" } }, "arrecadacaoTotal": "R$ 109.181.808,00", "proximoConcurso": { "data": "01/01/2999", "valorEstimado": "99.999.999,00" }, "valorAcumuladoFinalCinco": "2.030.190,42", "valorAcumuladoMegaVirada": "2.208.593,74" },
-    { "numero": "2546", "data": "3/11/2022", "cidade": "SÃO PAULO, SP", "local": "SÃO PAULO, SP", "valorAcumulado": "R$ 110.174.385,36", "dezenas": ["03", "23", "28", "34", "38", "48"], "premiacao": { "sena": { "ganhadores": "0", "valorPago": "R$ 0,00" }, "quina": { "ganhadores": "128", "valorPago": "R$ 49.345,74" }, "quadra": { "ganhadores": "9138", "valorPago": "R$ 987,43" } }, "arrecadacaoTotal": "R$ 109.551.649,50", "proximoConcurso": { "data": "01/01/2999", "valorEstimado": "99.999.999,00" }, "valorAcumuladoFinalCinco": "2.030.190,42", "valorAcumuladoMegaVirada": "2.208.593,74" },
-    { "numero": "2547", "data": "6/11/2022", "cidade": "SÃO PAULO, SP", "local": "SÃO PAULO, SP", "valorAcumulado": "R$ 122.289.764,56", "dezenas": ["10", "25", "31", "37", "38", "57"], "premiacao": { "sena": { "ganhadores": "0", "valorPago": "R$ 0,00" }, "quina": { "ganhadores": "100", "valorPago": "R$ 65.769,20" }, "quadra": { "ganhadores": "8588", "valorPago": "R$ 1.094,03" } }, "arrecadacaoTotal": "R$ 114.072.727,50", "proximoConcurso": { "data": "01/01/2999", "valorEstimado": "99.999.999,00" }, "valorAcumuladoFinalCinco": "2.030.190,42", "valorAcumuladoMegaVirada": "2.208.593,74" },
-    { "numero": "2548", "data": "3/11/2022", "cidade": "SÃO PAULO, SP", "local": "SÃO PAULO, SP", "valorAcumulado": "R$ 0,00", "dezenas": ["09", "15", "23", "25", "29", "30"], "premiacao": { "sena": { "ganhadores": "1", "valorPago": "R$ 134.811.174,29" }, "quina": { "ganhadores": "186", "valorPago": "R$ 36.544,82" }, "quadra": { "ganhadores": "12011", "valorPago": "R$ 808,46" } }, "arrecadacaoTotal": "R$ 117.895.720,50", "proximoConcurso": { "data": "01/01/2999", "valorEstimado": "99.999.999,00" }, "valorAcumuladoFinalCinco": "2.030.190,42", "valorAcumuladoMegaVirada": "2.208.593,74" },
-    { "numero": "2549", "data": "6/11/2022", "cidade": "SÃO PAULO,   SP", "local": "SÃO PAULO,   SP", "valorAcumulado": "R$ 173.509.265,45", "dezenas": ["01", "06", "10", "30", "33", "35"], "premiacao": { "sena": { "ganhadores": "0", "valorPago": "R$ 0,00" }, "quina": { "ganhadores": "107", "valorPago": "R$ 22.867,86" }, "quadra": { "ganhadores": "5232", "valorPago": "R$ 668,10" } }, "arrecadacaoTotal": "R$ 42.439.333,50", "proximoConcurso": { "data": "01/01/2999", "valorEstimado": "99.999.999,00" }, "valorAcumuladoFinalCinco": "2.030.190,42", "valorAcumuladoMegaVirada": "2.208.593,74" },
-    { "numero": "2550", "data": "6/11/2022", "cidade": "SÃO PAULO,  SP", "local": "SÃO PAULO,  SP", "valorAcumulado": "R$ 0,00", "dezenas": ["04", "05", "10", "34", "58", "59"], "premiacao": { "sena": { "ganhadores": "5", "valorPago": "R$ 108.393.993,26" }, "quina": { "ganhadores": "2485", "valorPago": "R$ 45.438,78" }, "quadra": { "ganhadores": "183921", "valorPago": "R$ 877,04" } }, "arrecadacaoTotal": "R$ 1.958.449.342,50", "proximoConcurso": { "data": "01/01/2999", "valorEstimado": "99.999.999,00" }, "valorAcumuladoFinalCinco": "2.030.190,42", "valorAcumuladoMegaVirada": "2.208.593,74" },
-    { "numero": "2551", "data": "3/0/2023", "cidade": "SÃO PAULO, SP", "local": "SÃO PAULO, SP", "valorAcumulado": "R$ 3.241.276,43", "dezenas": ["01", "25", "29", "43", "46", "48"], "premiacao": { "sena": { "ganhadores": "0", "valorPago": "R$ 0,00" }, "quina": { "ganhadores": "49", "valorPago": "R$ 35.909,19" }, "quadra": { "ganhadores": "2428", "valorPago": "R$ 1.035,27" } }, "arrecadacaoTotal": "R$ 30.518.338,50", "proximoConcurso": { "data": "01/01/2999", "valorEstimado": "99.999.999,00" }, "valorAcumuladoFinalCinco": "2.030.190,42", "valorAcumuladoMegaVirada": "2.208.593,74" },
-
-
+    {
+        "numero": "2501",
+        "data": "6/6/2022",
+        "cidade": "SÃO PAULO, SP",
+        "local": "SÃO PAULO, SP",
+        "valorAcumulado": "R$ 3.899.470,54",
+        "dezenas": [
+            "11",
+            "27",
+            "32",
+            "40",
+            "58",
+            "59"
+        ],
+        "premiacao": {
+            "sena": {
+                "ganhadores": "0",
+                "valorPago": "R$ 0,00"
+            },
+            "quina": {
+                "ganhadores": "30",
+                "valorPago": "R$ 70.561,85"
+            },
+            "quadra": {
+                "ganhadores": "2331",
+                "valorPago": "R$ 1.297,33"
+            }
+        },
+        "arrecadacaoTotal": "R$ 36.715.585,50",
+        "proximoConcurso": {
+            "data": "01/01/2999",
+            "valorEstimado": "99.999.999,00"
+        },
+        "valorAcumuladoFinalCinco": "2.030.190,42",
+        "valorAcumuladoMegaVirada": "2.208.593,74"
+    },
+    {
+        "numero": "2502",
+        "data": "3/6/2022",
+        "cidade": "SÃO PAULO, SP",
+        "local": "SÃO PAULO, SP",
+        "valorAcumulado": "R$ 8.248.378,04",
+        "dezenas": [
+            "16",
+            "20",
+            "21",
+            "39",
+            "44",
+            "55"
+        ],
+        "premiacao": {
+            "sena": {
+                "ganhadores": "0",
+                "valorPago": "R$ 0,00"
+            },
+            "quina": {
+                "ganhadores": "103",
+                "valorPago": "R$ 22.920,73"
+            },
+            "quadra": {
+                "ganhadores": "2914",
+                "valorPago": "R$ 1.157,38"
+            }
+        },
+        "arrecadacaoTotal": "R$ 40.947.273,00",
+        "proximoConcurso": {
+            "data": "01/01/2999",
+            "valorEstimado": "99.999.999,00"
+        },
+        "valorAcumuladoFinalCinco": "2.030.190,42",
+        "valorAcumuladoMegaVirada": "2.208.593,74"
+    },
+    {
+        "numero": "2503",
+        "data": "6/6/2022",
+        "cidade": "SÃO PAULO, SP",
+        "local": "SÃO PAULO, SP",
+        "valorAcumulado": "R$ 0,00",
+        "dezenas": [
+            "03",
+            "14",
+            "16",
+            "38",
+            "43",
+            "45"
+        ],
+        "premiacao": {
+            "sena": {
+                "ganhadores": "1",
+                "valorPago": "R$ 13.748.083,57"
+            },
+            "quina": {
+                "ganhadores": "91",
+                "valorPago": "R$ 32.808,29"
+            },
+            "quadra": {
+                "ganhadores": "5194",
+                "valorPago": "R$ 821,15"
+            }
+        },
+        "arrecadacaoTotal": "R$ 51.782.647,50",
+        "proximoConcurso": {
+            "data": "01/01/2999",
+            "valorEstimado": "99.999.999,00"
+        },
+        "valorAcumuladoFinalCinco": "2.030.190,42",
+        "valorAcumuladoMegaVirada": "2.208.593,74"
+    },
+    {
+        "numero": "2504",
+        "data": "3/6/2022",
+        "cidade": "SÃO PAULO,  SP",
+        "local": "SÃO PAULO,  SP",
+        "valorAcumulado": "R$ 17.766.858,97",
+        "dezenas": [
+            "14",
+            "33",
+            "41",
+            "42",
+            "44",
+            "55"
+        ],
+        "premiacao": {
+            "sena": {
+                "ganhadores": "0",
+                "valorPago": "R$ 0,00"
+            },
+            "quina": {
+                "ganhadores": "39",
+                "valorPago": "R$ 46.871,70"
+            },
+            "quadra": {
+                "ganhadores": "2885",
+                "valorPago": "R$ 905,17"
+            }
+        },
+        "arrecadacaoTotal": "R$ 31.705.497,00",
+        "proximoConcurso": {
+            "data": "01/01/2999",
+            "valorEstimado": "99.999.999,00"
+        },
+        "valorAcumuladoFinalCinco": "2.030.190,42",
+        "valorAcumuladoMegaVirada": "2.208.593,74"
+    },
+    {
+        "numero": "2505",
+        "data": "6/6/2022",
+        "cidade": "SÃO PAULO, SP",
+        "local": "SÃO PAULO, SP",
+        "valorAcumulado": "R$ 0,00",
+        "dezenas": [
+            "03",
+            "05",
+            "19",
+            "26",
+            "43",
+            "51"
+        ],
+        "premiacao": {
+            "sena": {
+                "ganhadores": "1",
+                "valorPago": "R$ 24.271.229,51"
+            },
+            "quina": {
+                "ganhadores": "108",
+                "valorPago": "R$ 32.693,92"
+            },
+            "quadra": {
+                "ganhadores": "6977",
+                "valorPago": "R$ 722,97"
+            }
+        },
+        "arrecadacaoTotal": "R$ 61.242.102,00",
+        "proximoConcurso": {
+            "data": "01/01/2999",
+            "valorEstimado": "99.999.999,00"
+        },
+        "valorAcumuladoFinalCinco": "2.030.190,42",
+        "valorAcumuladoMegaVirada": "2.208.593,74"
+    },
+    {
+        "numero": "2506",
+        "data": "2/7/2022",
+        "cidade": "SÃO PAULO, SP",
+        "local": "SÃO PAULO, SP",
+        "valorAcumulado": "R$ 2.239.676,89",
+        "dezenas": [
+            "21",
+            "22",
+            "29",
+            "34",
+            "40",
+            "44"
+        ],
+        "premiacao": {
+            "sena": {
+                "ganhadores": "0",
+                "valorPago": "R$ 0,00"
+            },
+            "quina": {
+                "ganhadores": "12",
+                "valorPago": "R$ 101.318,72"
+            },
+            "quadra": {
+                "ganhadores": "1145",
+                "valorPago": "R$ 1.516,93"
+            }
+        },
+        "arrecadacaoTotal": "R$ 21.087.747,00",
+        "proximoConcurso": {
+            "data": "01/01/2999",
+            "valorEstimado": "99.999.999,00"
+        },
+        "valorAcumuladoFinalCinco": "2.030.190,42",
+        "valorAcumuladoMegaVirada": "2.208.593,74"
+    },
+    {
+        "numero": "2507",
+        "data": "4/7/2022",
+        "cidade": "SÃO PAULO, SP",
+        "local": "SÃO PAULO, SP",
+        "valorAcumulado": "R$ 0,00",
+        "dezenas": [
+            "04",
+            "06",
+            "12",
+            "34",
+            "35",
+            "53"
+        ],
+        "premiacao": {
+            "sena": {
+                "ganhadores": "1",
+                "valorPago": "R$ 5.543.989,92"
+            },
+            "quina": {
+                "ganhadores": "47",
+                "valorPago": "R$ 38.165,32"
+            },
+            "quadra": {
+                "ganhadores": "3385",
+                "valorPago": "R$ 757,02"
+            }
+        },
+        "arrecadacaoTotal": "R$ 31.111.861,50",
+        "proximoConcurso": {
+            "data": "01/01/2999",
+            "valorEstimado": "99.999.999,00"
+        },
+        "valorAcumuladoFinalCinco": "2.030.190,42",
+        "valorAcumuladoMegaVirada": "2.208.593,74"
+    },
+    {
+        "numero": "2508",
+        "data": "6/7/2022",
+        "cidade": "SÃO PAULO, SP",
+        "local": "SÃO PAULO, SP",
+        "valorAcumulado": "R$ 3.435.428,42",
+        "dezenas": [
+            "41",
+            "45",
+            "48",
+            "51",
+            "53",
+            "58"
+        ],
+        "premiacao": {
+            "sena": {
+                "ganhadores": "0",
+                "valorPago": "R$ 0,00"
+            },
+            "quina": {
+                "ganhadores": "26",
+                "valorPago": "R$ 71.728,72"
+            },
+            "quadra": {
+                "ganhadores": "1510",
+                "valorPago": "R$ 1.764,37"
+            }
+        },
+        "arrecadacaoTotal": "R$ 32.346.382,50",
+        "proximoConcurso": {
+            "data": "01/01/2999",
+            "valorEstimado": "99.999.999,00"
+        },
+        "valorAcumuladoFinalCinco": "2.030.190,42",
+        "valorAcumuladoMegaVirada": "2.208.593,74"
+    },
+    {
+        "numero": "2509",
+        "data": "3/7/2022",
+        "cidade": "SÃO PAULO,  SP",
+        "local": "SÃO PAULO,  SP",
+        "valorAcumulado": "R$ 20.074.834,59",
+        "dezenas": [
+            "08",
+            "37",
+            "39",
+            "50",
+            "59",
+            "60"
+        ],
+        "premiacao": {
+            "sena": {
+                "ganhadores": "0",
+                "valorPago": "R$ 0,00"
+            },
+            "quina": {
+                "ganhadores": "47",
+                "valorPago": "R$ 48.983,97"
+            },
+            "quadra": {
+                "ganhadores": "2560",
+                "valorPago": "R$ 1.284,73"
+            }
+        },
+        "arrecadacaoTotal": "R$ 39.931.078,50",
+        "proximoConcurso": {
+            "data": "01/01/2999",
+            "valorEstimado": "99.999.999,00"
+        },
+        "valorAcumuladoFinalCinco": "2.030.190,42",
+        "valorAcumuladoMegaVirada": "2.208.593,74"
+    },
+    {
+        "numero": "2510",
+        "data": "6/7/2022",
+        "cidade": "SÃO PAULO, SP",
+        "local": "SÃO PAULO, SP",
+        "valorAcumulado": "R$ 0,00",
+        "dezenas": [
+            "08",
+            "13",
+            "25",
+            "32",
+            "44",
+            "57"
+        ],
+        "premiacao": {
+            "sena": {
+                "ganhadores": "4",
+                "valorPago": "R$ 6.670.155,67"
+            },
+            "quina": {
+                "ganhadores": "242",
+                "valorPago": "R$ 14.818,18"
+            },
+            "quadra": {
+                "ganhadores": "10296",
+                "valorPago": "R$ 497,55"
+            }
+        },
+        "arrecadacaoTotal": "R$ 62.197.002,00",
+        "proximoConcurso": {
+            "data": "01/01/2999",
+            "valorEstimado": "99.999.999,00"
+        },
+        "valorAcumuladoFinalCinco": "2.030.190,42",
+        "valorAcumuladoMegaVirada": "2.208.593,74"
+    },
+    {
+        "numero": "2511",
+        "data": "3/7/2022",
+        "cidade": "SÃO PAULO, SP",
+        "local": "SÃO PAULO, SP",
+        "valorAcumulado": "R$ 3.191.408,35",
+        "dezenas": [
+            "04",
+            "10",
+            "15",
+            "39",
+            "41",
+            "49"
+        ],
+        "premiacao": {
+            "sena": {
+                "ganhadores": "0",
+                "valorPago": "R$ 0,00"
+            },
+            "quina": {
+                "ganhadores": "31",
+                "valorPago": "R$ 55.886,42"
+            },
+            "quadra": {
+                "ganhadores": "2031",
+                "valorPago": "R$ 1.218,59"
+            }
+        },
+        "arrecadacaoTotal": "R$ 30.048.804,00",
+        "proximoConcurso": {
+            "data": "01/01/2999",
+            "valorEstimado": "99.999.999,00"
+        },
+        "valorAcumuladoFinalCinco": "2.030.190,42",
+        "valorAcumuladoMegaVirada": "2.208.593,74"
+    },
+    {
+        "numero": "2512",
+        "data": "6/7/2022",
+        "cidade": "SÃO PAULO, SP",
+        "local": "SÃO PAULO, SP",
+        "valorAcumulado": "R$ 7.821.502,90",
+        "dezenas": [
+            "07",
+            "10",
+            "34",
+            "47",
+            "49",
+            "52"
+        ],
+        "premiacao": {
+            "sena": {
+                "ganhadores": "0",
+                "valorPago": "R$ 0,00"
+            },
+            "quina": {
+                "ganhadores": "81",
+                "valorPago": "R$ 31.030,62"
+            },
+            "quadra": {
+                "ganhadores": "4382",
+                "valorPago": "R$ 819,41"
+            }
+        },
+        "arrecadacaoTotal": "R$ 43.594.798,50",
+        "proximoConcurso": {
+            "data": "01/01/2999",
+            "valorEstimado": "99.999.999,00"
+        },
+        "valorAcumuladoFinalCinco": "2.030.190,42",
+        "valorAcumuladoMegaVirada": "2.208.593,74"
+    },
+    {
+        "numero": "2513",
+        "data": "3/7/2022",
+        "cidade": "SÃO PAULO, SP",
+        "local": "SÃO PAULO, SP",
+        "valorAcumulado": "R$ 12.561.383,62",
+        "dezenas": [
+            "13",
+            "19",
+            "21",
+            "35",
+            "46",
+            "50"
+        ],
+        "premiacao": {
+            "sena": {
+                "ganhadores": "0",
+                "valorPago": "R$ 0,00"
+            },
+            "quina": {
+                "ganhadores": "62",
+                "valorPago": "R$ 41.501,26"
+            },
+            "quadra": {
+                "ganhadores": "3823",
+                "valorPago": "R$ 961,50"
+            }
+        },
+        "arrecadacaoTotal": "R$ 44.628.493,50",
+        "proximoConcurso": {
+            "data": "01/01/2999",
+            "valorEstimado": "99.999.999,00"
+        },
+        "valorAcumuladoFinalCinco": "2.030.190,42",
+        "valorAcumuladoMegaVirada": "2.208.593,74"
+    },
+    {
+        "numero": "2514",
+        "data": "6/7/2022",
+        "cidade": "SÃO PAULO,  SP",
+        "local": "SÃO PAULO,  SP",
+        "valorAcumulado": "R$ 33.953.898,66",
+        "dezenas": [
+            "05",
+            "15",
+            "24",
+            "34",
+            "45",
+            "52"
+        ],
+        "premiacao": {
+            "sena": {
+                "ganhadores": "0",
+                "valorPago": "R$ 0,00"
+            },
+            "quina": {
+                "ganhadores": "52",
+                "valorPago": "R$ 59.901,15"
+            },
+            "quadra": {
+                "ganhadores": "4477",
+                "valorPago": "R$ 993,92"
+            }
+        },
+        "arrecadacaoTotal": "R$ 54.025.366,50",
+        "proximoConcurso": {
+            "data": "01/01/2999",
+            "valorEstimado": "99.999.999,00"
+        },
+        "valorAcumuladoFinalCinco": "2.030.190,42",
+        "valorAcumuladoMegaVirada": "2.208.593,74"
+    },
+    {
+        "numero": "2515",
+        "data": "3/7/2022",
+        "cidade": "SÃO PAULO, SP",
+        "local": "SÃO PAULO, SP",
+        "valorAcumulado": "R$ 40.890.828,40",
+        "dezenas": [
+            "03",
+            "12",
+            "19",
+            "41",
+            "45",
+            "54"
+        ],
+        "premiacao": {
+            "sena": {
+                "ganhadores": "0",
+                "valorPago": "R$ 0,00"
+            },
+            "quina": {
+                "ganhadores": "97",
+                "valorPago": "R$ 38.822,29"
+            },
+            "quadra": {
+                "ganhadores": "6861",
+                "valorPago": "R$ 784,09"
+            }
+        },
+        "arrecadacaoTotal": "R$ 65.314.876,50",
+        "proximoConcurso": {
+            "data": "01/01/2999",
+            "valorEstimado": "99.999.999,00"
+        },
+        "valorAcumuladoFinalCinco": "2.030.190,42",
+        "valorAcumuladoMegaVirada": "2.208.593,74"
+    },
+    {
+        "numero": "2516",
+        "data": "6/8/2022",
+        "cidade": "SÃO PAULO, SP",
+        "local": "SÃO PAULO, SP",
+        "valorAcumulado": "R$ 49.384.545,61",
+        "dezenas": [
+            "08",
+            "17",
+            "49",
+            "51",
+            "52",
+            "53"
+        ],
+        "premiacao": {
+            "sena": {
+                "ganhadores": "0",
+                "valorPago": "R$ 0,00"
+            },
+            "quina": {
+                "ganhadores": "94",
+                "valorPago": "R$ 49.051,86"
+            },
+            "quadra": {
+                "ganhadores": "6665",
+                "valorPago": "R$ 988,29"
+            }
+        },
+        "arrecadacaoTotal": "R$ 79.972.857,00",
+        "proximoConcurso": {
+            "data": "01/01/2999",
+            "valorEstimado": "99.999.999,00"
+        },
+        "valorAcumuladoFinalCinco": "2.030.190,42",
+        "valorAcumuladoMegaVirada": "2.208.593,74"
+    },
+    {
+        "numero": "2517",
+        "data": "4/8/2022",
+        "cidade": "SÃO PAULO, SP",
+        "local": "SÃO PAULO, SP",
+        "valorAcumulado": "R$ 57.698.210,35",
+        "dezenas": [
+            "01",
+            "05",
+            "06",
+            "16",
+            "22",
+            "39"
+        ],
+        "premiacao": {
+            "sena": {
+                "ganhadores": "0",
+                "valorPago": "R$ 0,00"
+            },
+            "quina": {
+                "ganhadores": "116",
+                "valorPago": "R$ 38.906,31"
+            },
+            "quadra": {
+                "ganhadores": "8240",
+                "valorPago": "R$ 782,44"
+            }
+        },
+        "arrecadacaoTotal": "R$ 78.277.567,50",
+        "proximoConcurso": {
+            "data": "01/01/2999",
+            "valorEstimado": "99.999.999,00"
+        },
+        "valorAcumuladoFinalCinco": "2.030.190,42",
+        "valorAcumuladoMegaVirada": "2.208.593,74"
+    },
+    {
+        "numero": "2518",
+        "data": "6/8/2022",
+        "cidade": "SÃO PAULO, SP",
+        "local": "SÃO PAULO, SP",
+        "valorAcumulado": "R$ 65.865.634,54",
+        "dezenas": [
+            "03",
+            "22",
+            "23",
+            "44",
+            "53",
+            "60"
+        ],
+        "premiacao": {
+            "sena": {
+                "ganhadores": "0",
+                "valorPago": "R$ 0,00"
+            },
+            "quina": {
+                "ganhadores": "112",
+                "valorPago": "R$ 39.587,01"
+            },
+            "quadra": {
+                "ganhadores": "7288",
+                "valorPago": "R$ 869,08"
+            }
+        },
+        "arrecadacaoTotal": "R$ 76.900.635,00",
+        "proximoConcurso": {
+            "data": "01/01/2999",
+            "valorEstimado": "99.999.999,00"
+        },
+        "valorAcumuladoFinalCinco": "2.030.190,42",
+        "valorAcumuladoMegaVirada": "2.208.593,74"
+    },
+    {
+        "numero": "2519",
+        "data": "2/8/2022",
+        "cidade": "SÃO PAULO,  SP",
+        "local": "SÃO PAULO,  SP",
+        "valorAcumulado": "R$ 98.323.155,10",
+        "dezenas": [
+            "03",
+            "08",
+            "20",
+            "36",
+            "38",
+            "57"
+        ],
+        "premiacao": {
+            "sena": {
+                "ganhadores": "0",
+                "valorPago": "R$ 0,00"
+            },
+            "quina": {
+                "ganhadores": "88",
+                "valorPago": "R$ 46.964,83"
+            },
+            "quadra": {
+                "ganhadores": "6736",
+                "valorPago": "R$ 876,50"
+            }
+        },
+        "arrecadacaoTotal": "R$ 71.682.754,50",
+        "proximoConcurso": {
+            "data": "01/01/2999",
+            "valorEstimado": "99.999.999,00"
+        },
+        "valorAcumuladoFinalCinco": "2.030.190,42",
+        "valorAcumuladoMegaVirada": "2.208.593,74"
+    },
+    {
+        "numero": "2520",
+        "data": "4/8/2022",
+        "cidade": "SÃO PAULO, SP",
+        "local": "SÃO PAULO, SP",
+        "valorAcumulado": "R$ 110.015.734,03",
+        "dezenas": [
+            "02",
+            "17",
+            "22",
+            "41",
+            "58",
+            "60"
+        ],
+        "premiacao": {
+            "sena": {
+                "ganhadores": "0",
+                "valorPago": "R$ 0,00"
+            },
+            "quina": {
+                "ganhadores": "160",
+                "valorPago": "R$ 39.671,25"
+            },
+            "quadra": {
+                "ganhadores": "10126",
+                "valorPago": "R$ 895,48"
+            }
+        },
+        "arrecadacaoTotal": "R$ 110.091.838,50",
+        "proximoConcurso": {
+            "data": "01/01/2999",
+            "valorEstimado": "99.999.999,00"
+        },
+        "valorAcumuladoFinalCinco": "2.030.190,42",
+        "valorAcumuladoMegaVirada": "2.208.593,74"
+    },
+    {
+        "numero": "2521",
+        "data": "6/8/2022",
+        "cidade": "SÃO PAULO, SP",
+        "local": "SÃO PAULO, SP",
+        "valorAcumulado": "R$ 124.667.917,23",
+        "dezenas": [
+            "23",
+            "28",
+            "33",
+            "38",
+            "55",
+            "59"
+        ],
+        "premiacao": {
+            "sena": {
+                "ganhadores": "0",
+                "valorPago": "R$ 0,00"
+            },
+            "quina": {
+                "ganhadores": "189",
+                "valorPago": "R$ 42.084,88"
+            },
+            "quadra": {
+                "ganhadores": "12204",
+                "valorPago": "R$ 931,08"
+            }
+        },
+        "arrecadacaoTotal": "R$ 137.958.084,00",
+        "proximoConcurso": {
+            "data": "01/01/2999",
+            "valorEstimado": "99.999.999,00"
+        },
+        "valorAcumuladoFinalCinco": "2.030.190,42",
+        "valorAcumuladoMegaVirada": "2.208.593,74"
+    },
+    {
+        "numero": "2522",
+        "data": "3/8/2022",
+        "cidade": "SÃO PAULO, SP",
+        "local": "SÃO PAULO, SP",
+        "valorAcumulado": "R$ 144.922.165,99",
+        "dezenas": [
+            "04",
+            "05",
+            "25",
+            "32",
+            "39",
+            "40"
+        ],
+        "premiacao": {
+            "sena": {
+                "ganhadores": "0",
+                "valorPago": "R$ 0,00"
+            },
+            "quina": {
+                "ganhadores": "202",
+                "valorPago": "R$ 54.431,51"
+            },
+            "quadra": {
+                "ganhadores": "17799",
+                "valorPago": "R$ 882,48"
+            }
+        },
+        "arrecadacaoTotal": "R$ 190.704.505,50",
+        "proximoConcurso": {
+            "data": "01/01/2999",
+            "valorEstimado": "99.999.999,00"
+        },
+        "valorAcumuladoFinalCinco": "2.030.190,42",
+        "valorAcumuladoMegaVirada": "2.208.593,74"
+    },
+    {
+        "numero": "2523",
+        "data": "6/8/2022",
+        "cidade": "SÃO PAULO, SP",
+        "local": "SÃO PAULO, SP",
+        "valorAcumulado": "R$ 169.218.785,10",
+        "dezenas": [
+            "01",
+            "10",
+            "27",
+            "36",
+            "37",
+            "45"
+        ],
+        "premiacao": {
+            "sena": {
+                "ganhadores": "0",
+                "valorPago": "R$ 0,00"
+            },
+            "quina": {
+                "ganhadores": "294",
+                "valorPago": "R$ 44.862,56"
+            },
+            "quadra": {
+                "ganhadores": "20572",
+                "valorPago": "R$ 915,91"
+            }
+        },
+        "arrecadacaoTotal": "R$ 228.765.568,50",
+        "proximoConcurso": {
+            "data": "01/01/2999",
+            "valorEstimado": "99.999.999,00"
+        },
+        "valorAcumuladoFinalCinco": "2.030.190,42",
+        "valorAcumuladoMegaVirada": "2.208.593,74"
+    },
+    {
+        "numero": "2524",
+        "data": "3/8/2022",
+        "cidade": "SÃO PAULO,  SP",
+        "local": "SÃO PAULO,  SP",
+        "valorAcumulado": "R$ 267.006.265,85",
+        "dezenas": [
+            "03",
+            "20",
+            "22",
+            "37",
+            "41",
+            "43"
+        ],
+        "premiacao": {
+            "sena": {
+                "ganhadores": "0",
+                "valorPago": "R$ 0,00"
+            },
+            "quina": {
+                "ganhadores": "404",
+                "valorPago": "R$ 43.914,62"
+            },
+            "quadra": {
+                "ganhadores": "30194",
+                "valorPago": "R$ 839,40"
+            }
+        },
+        "arrecadacaoTotal": "R$ 307.715.733,00",
+        "proximoConcurso": {
+            "data": "01/01/2999",
+            "valorEstimado": "99.999.999,00"
+        },
+        "valorAcumuladoFinalCinco": "2.030.190,42",
+        "valorAcumuladoMegaVirada": "2.208.593,74"
+    },
+    {
+        "numero": "2525",
+        "data": "6/9/2022",
+        "cidade": "SÃO PAULO, SP",
+        "local": "SÃO PAULO, SP",
+        "valorAcumulado": "R$ 0,00",
+        "dezenas": [
+            "04",
+            "13",
+            "21",
+            "26",
+            "47",
+            "51"
+        ],
+        "premiacao": {
+            "sena": {
+                "ganhadores": "2",
+                "valorPago": "R$ 158.926.894,27"
+            },
+            "quina": {
+                "ganhadores": "814",
+                "valorPago": "R$ 33.910,24"
+            },
+            "quadra": {
+                "ganhadores": "52760",
+                "valorPago": "R$ 747,39"
+            }
+        },
+        "arrecadacaoTotal": "R$ 478.756.422,00",
+        "proximoConcurso": {
+            "data": "01/01/2999",
+            "valorEstimado": "99.999.999,00"
+        },
+        "valorAcumuladoFinalCinco": "2.030.190,42",
+        "valorAcumuladoMegaVirada": "2.208.593,74"
+    },
+    {
+        "numero": "2526",
+        "data": "3/9/2022",
+        "cidade": "SÃO PAULO, SP",
+        "local": "SÃO PAULO, SP",
+        "valorAcumulado": "R$ 4.234.172,81",
+        "dezenas": [
+            "02",
+            "16",
+            "24",
+            "38",
+            "43",
+            "59"
+        ],
+        "premiacao": {
+            "sena": {
+                "ganhadores": "0",
+                "valorPago": "R$ 0,00"
+            },
+            "quina": {
+                "ganhadores": "107",
+                "valorPago": "R$ 21.481,79"
+            },
+            "quadra": {
+                "ganhadores": "4518",
+                "valorPago": "R$ 726,79"
+            }
+        },
+        "arrecadacaoTotal": "R$ 39.866.985,00",
+        "proximoConcurso": {
+            "data": "01/01/2999",
+            "valorEstimado": "99.999.999,00"
+        },
+        "valorAcumuladoFinalCinco": "2.030.190,42",
+        "valorAcumuladoMegaVirada": "2.208.593,74"
+    },
+    {
+        "numero": "2527",
+        "data": "6/9/2022",
+        "cidade": "SÃO PAULO, SP",
+        "local": "SÃO PAULO, SP",
+        "valorAcumulado": "R$ 10.242.650,28",
+        "dezenas": [
+            "08",
+            "19",
+            "29",
+            "38",
+            "48",
+            "56"
+        ],
+        "premiacao": {
+            "sena": {
+                "ganhadores": "0",
+                "valorPago": "R$ 0,00"
+            },
+            "quina": {
+                "ganhadores": "80",
+                "valorPago": "R$ 40.771,81"
+            },
+            "quadra": {
+                "ganhadores": "4182",
+                "valorPago": "R$ 1.114,21"
+            }
+        },
+        "arrecadacaoTotal": "R$ 56.573.005,50",
+        "proximoConcurso": {
+            "data": "01/01/2999",
+            "valorEstimado": "99.999.999,00"
+        },
+        "valorAcumuladoFinalCinco": "2.030.190,42",
+        "valorAcumuladoMegaVirada": "2.208.593,74"
+    },
+    {
+        "numero": "2528",
+        "data": "4/9/2022",
+        "cidade": "SÃO PAULO, SP",
+        "local": "SÃO PAULO, SP",
+        "valorAcumulado": "R$ 16.470.907,98",
+        "dezenas": [
+            "04",
+            "15",
+            "22",
+            "53",
+            "56",
+            "60"
+        ],
+        "premiacao": {
+            "sena": {
+                "ganhadores": "0",
+                "valorPago": "R$ 0,00"
+            },
+            "quina": {
+                "ganhadores": "64",
+                "valorPago": "R$ 52.828,97"
+            },
+            "quadra": {
+                "ganhadores": "4684",
+                "valorPago": "R$ 1.031,18"
+            }
+        },
+        "arrecadacaoTotal": "R$ 58.642.353,00",
+        "proximoConcurso": {
+            "data": "01/01/2999",
+            "valorEstimado": "99.999.999,00"
+        },
+        "valorAcumuladoFinalCinco": "2.030.190,42",
+        "valorAcumuladoMegaVirada": "2.208.593,74"
+    },
+    {
+        "numero": "2529",
+        "data": "6/9/2022",
+        "cidade": "SÃO PAULO,  SP",
+        "local": "SÃO PAULO,  SP",
+        "valorAcumulado": "R$ 69.851.771,07",
+        "dezenas": [
+            "03",
+            "05",
+            "32",
+            "56",
+            "57",
+            "59"
+        ],
+        "premiacao": {
+            "sena": {
+                "ganhadores": "0",
+                "valorPago": "R$ 0,00"
+            },
+            "quina": {
+                "ganhadores": "84",
+                "valorPago": "R$ 43.914,37"
+            },
+            "quadra": {
+                "ganhadores": "5632",
+                "valorPago": "R$ 935,67"
+            }
+        },
+        "arrecadacaoTotal": "R$ 63.980.140,50",
+        "proximoConcurso": {
+            "data": "01/01/2999",
+            "valorEstimado": "99.999.999,00"
+        },
+        "valorAcumuladoFinalCinco": "2.030.190,42",
+        "valorAcumuladoMegaVirada": "2.208.593,74"
+    },
+    {
+        "numero": "2530",
+        "data": "2/9/2022",
+        "cidade": "SÃO PAULO, SP",
+        "local": "SÃO PAULO, SP",
+        "valorAcumulado": "R$ 76.812.987,97",
+        "dezenas": [
+            "14",
+            "17",
+            "18",
+            "28",
+            "30",
+            "44"
+        ],
+        "premiacao": {
+            "sena": {
+                "ganhadores": "0",
+                "valorPago": "R$ 0,00"
+            },
+            "quina": {
+                "ganhadores": "80",
+                "valorPago": "R$ 47.236,83"
+            },
+            "quadra": {
+                "ganhadores": "6922",
+                "valorPago": "R$ 779,90"
+            }
+        },
+        "arrecadacaoTotal": "R$ 65.543.553,00",
+        "proximoConcurso": {
+            "data": "01/01/2999",
+            "valorEstimado": "99.999.999,00"
+        },
+        "valorAcumuladoFinalCinco": "2.030.190,42",
+        "valorAcumuladoMegaVirada": "2.208.593,74"
+    },
+    {
+        "numero": "2531",
+        "data": "4/9/2022",
+        "cidade": "SÃO PAULO, SP",
+        "local": "SÃO PAULO, SP",
+        "valorAcumulado": "R$ 86.434.034,75",
+        "dezenas": [
+            "01",
+            "05",
+            "18",
+            "49",
+            "55",
+            "56"
+        ],
+        "premiacao": {
+            "sena": {
+                "ganhadores": "0",
+                "valorPago": "R$ 0,00"
+            },
+            "quina": {
+                "ganhadores": "107",
+                "valorPago": "R$ 48.811,72"
+            },
+            "quadra": {
+                "ganhadores": "7174",
+                "valorPago": "R$ 1.040,03"
+            }
+        },
+        "arrecadacaoTotal": "R$ 90.587.263,50",
+        "proximoConcurso": {
+            "data": "01/01/2999",
+            "valorEstimado": "99.999.999,00"
+        },
+        "valorAcumuladoFinalCinco": "2.030.190,42",
+        "valorAcumuladoMegaVirada": "2.208.593,74"
+    },
+    {
+        "numero": "2532",
+        "data": "6/9/2022",
+        "cidade": "SÃO PAULO, SP",
+        "local": "SÃO PAULO, SP",
+        "valorAcumulado": "R$ 99.395.922,57",
+        "dezenas": [
+            "10",
+            "14",
+            "17",
+            "18",
+            "23",
+            "30"
+        ],
+        "premiacao": {
+            "sena": {
+                "ganhadores": "0",
+                "valorPago": "R$ 0,00"
+            },
+            "quina": {
+                "ganhadores": "259",
+                "valorPago": "R$ 27.167,77"
+            },
+            "quadra": {
+                "ganhadores": "18616",
+                "valorPago": "R$ 539,96"
+            }
+        },
+        "arrecadacaoTotal": "R$ 122.043.055,50",
+        "proximoConcurso": {
+            "data": "01/01/2999",
+            "valorEstimado": "99.999.999,00"
+        },
+        "valorAcumuladoFinalCinco": "2.030.190,42",
+        "valorAcumuladoMegaVirada": "2.208.593,74"
+    },
+    {
+        "numero": "2533",
+        "data": "3/9/2022",
+        "cidade": "SÃO PAULO, SP",
+        "local": "SÃO PAULO, SP",
+        "valorAcumulado": "R$ 114.116.759,04",
+        "dezenas": [
+            "17",
+            "18",
+            "20",
+            "37",
+            "45",
+            "53"
+        ],
+        "premiacao": {
+            "sena": {
+                "ganhadores": "0",
+                "valorPago": "R$ 0,00"
+            },
+            "quina": {
+                "ganhadores": "134",
+                "valorPago": "R$ 59.636,65"
+            },
+            "quadra": {
+                "ganhadores": "11048",
+                "valorPago": "R$ 1.033,32"
+            }
+        },
+        "arrecadacaoTotal": "R$ 138.604.491,00",
+        "proximoConcurso": {
+            "data": "01/01/2999",
+            "valorEstimado": "99.999.999,00"
+        },
+        "valorAcumuladoFinalCinco": "2.030.190,42",
+        "valorAcumuladoMegaVirada": "2.208.593,74"
+    },
+    {
+        "numero": "2534",
+        "data": "6/9/2022",
+        "cidade": "SÃO PAULO, SP",
+        "local": "SÃO PAULO, SP",
+        "valorAcumulado": "R$ 38.792.396,04",
+        "dezenas": [
+            "28",
+            "36",
+            "39",
+            "44",
+            "56",
+            "60"
+        ],
+        "premiacao": {
+            "sena": {
+                "ganhadores": "1",
+                "valorPago": "R$ 131.566.946,59"
+            },
+            "quina": {
+                "ganhadores": "176",
+                "valorPago": "R$ 53.823,63"
+            },
+            "quadra": {
+                "ganhadores": "12797",
+                "valorPago": "R$ 1.057,49"
+            }
+        },
+        "arrecadacaoTotal": "R$ 164.302.780,50",
+        "proximoConcurso": {
+            "data": "01/01/2999",
+            "valorEstimado": "99.999.999,00"
+        },
+        "valorAcumuladoFinalCinco": "2.030.190,42",
+        "valorAcumuladoMegaVirada": "2.208.593,74"
+    },
+    {
+        "numero": "2535",
+        "data": "4/10/2022",
+        "cidade": "SÃO PAULO, SP",
+        "local": "SÃO PAULO, SP",
+        "valorAcumulado": "R$ 45.935.605,33",
+        "dezenas": [
+            "01",
+            "03",
+            "24",
+            "37",
+            "51",
+            "56"
+        ],
+        "premiacao": {
+            "sena": {
+                "ganhadores": "0",
+                "valorPago": "R$ 0,00"
+            },
+            "quina": {
+                "ganhadores": "59",
+                "valorPago": "R$ 65.724,45"
+            },
+            "quadra": {
+                "ganhadores": "5885",
+                "valorPago": "R$ 941,31"
+            }
+        },
+        "arrecadacaoTotal": "R$ 67.257.108,00",
+        "proximoConcurso": {
+            "data": "01/01/2999",
+            "valorEstimado": "99.999.999,00"
+        },
+        "valorAcumuladoFinalCinco": "2.030.190,42",
+        "valorAcumuladoMegaVirada": "2.208.593,74"
+    },
+    {
+        "numero": "2536",
+        "data": "6/10/2022",
+        "cidade": "SÃO PAULO, SP",
+        "local": "SÃO PAULO, SP",
+        "valorAcumulado": "R$ 54.575.161,62",
+        "dezenas": [
+            "09",
+            "22",
+            "27",
+            "30",
+            "33",
+            "45"
+        ],
+        "premiacao": {
+            "sena": {
+                "ganhadores": "0",
+                "valorPago": "R$ 0,00"
+            },
+            "quina": {
+                "ganhadores": "163",
+                "valorPago": "R$ 28.773,28"
+            },
+            "quadra": {
+                "ganhadores": "10787",
+                "valorPago": "R$ 621,12"
+            }
+        },
+        "arrecadacaoTotal": "R$ 81.346.009,50",
+        "proximoConcurso": {
+            "data": "01/01/2999",
+            "valorEstimado": "99.999.999,00"
+        },
+        "valorAcumuladoFinalCinco": "2.030.190,42",
+        "valorAcumuladoMegaVirada": "2.208.593,74"
+    },
+    {
+        "numero": "2537",
+        "data": "3/10/2022",
+        "cidade": "SÃO PAULO, SP",
+        "local": "SÃO PAULO, SP",
+        "valorAcumulado": "R$ 0,00",
+        "dezenas": [
+            "12",
+            "24",
+            "26",
+            "31",
+            "37",
+            "48"
+        ],
+        "premiacao": {
+            "sena": {
+                "ganhadores": "1",
+                "valorPago": "R$ 64.250.536,10"
+            },
+            "quina": {
+                "ganhadores": "94",
+                "valorPago": "R$ 55.876,02"
+            },
+            "quadra": {
+                "ganhadores": "9282",
+                "valorPago": "R$ 808,37"
+            }
+        },
+        "arrecadacaoTotal": "R$ 91.098.787,50",
+        "proximoConcurso": {
+            "data": "01/01/2999",
+            "valorEstimado": "99.999.999,00"
+        },
+        "valorAcumuladoFinalCinco": "2.030.190,42",
+        "valorAcumuladoMegaVirada": "2.208.593,74"
+    },
+    {
+        "numero": "2538",
+        "data": "6/10/2022",
+        "cidade": "SÃO PAULO, SP",
+        "local": "SÃO PAULO, SP",
+        "valorAcumulado": "R$ 4.837.128,77",
+        "dezenas": [
+            "06",
+            "15",
+            "19",
+            "20",
+            "33",
+            "52"
+        ],
+        "premiacao": {
+            "sena": {
+                "ganhadores": "0",
+                "valorPago": "R$ 0,00"
+            },
+            "quina": {
+                "ganhadores": "45",
+                "valorPago": "R$ 58.352,66"
+            },
+            "quadra": {
+                "ganhadores": "4693",
+                "valorPago": "R$ 799,32"
+            }
+        },
+        "arrecadacaoTotal": "R$ 45.544.135,50",
+        "proximoConcurso": {
+            "data": "01/01/2999",
+            "valorEstimado": "99.999.999,00"
+        },
+        "valorAcumuladoFinalCinco": "2.030.190,42",
+        "valorAcumuladoMegaVirada": "2.208.593,74"
+    },
+    {
+        "numero": "2539",
+        "data": "3/10/2022",
+        "cidade": "SÃO PAULO,  SP",
+        "local": "SÃO PAULO,  SP",
+        "valorAcumulado": "R$ 31.145.754,74",
+        "dezenas": [
+            "01",
+            "23",
+            "32",
+            "33",
+            "36",
+            "59"
+        ],
+        "premiacao": {
+            "sena": {
+                "ganhadores": "0",
+                "valorPago": "R$ 0,00"
+            },
+            "quina": {
+                "ganhadores": "32",
+                "valorPago": "R$ 75.686,31"
+            },
+            "quadra": {
+                "ganhadores": "3223",
+                "valorPago": "R$ 1.073,51"
+            }
+        },
+        "arrecadacaoTotal": "R$ 42.007.473,00",
+        "proximoConcurso": {
+            "data": "01/01/2999",
+            "valorEstimado": "99.999.999,00"
+        },
+        "valorAcumuladoFinalCinco": "2.030.190,42",
+        "valorAcumuladoMegaVirada": "2.208.593,74"
+    },
+    {
+        "numero": "2540",
+        "data": "6/10/2022",
+        "cidade": "SÃO PAULO, SP",
+        "local": "SÃO PAULO, SP",
+        "valorAcumulado": "R$ 38.761.752,82",
+        "dezenas": [
+            "02",
+            "08",
+            "28",
+            "34",
+            "41",
+            "49"
+        ],
+        "premiacao": {
+            "sena": {
+                "ganhadores": "0",
+                "valorPago": "R$ 0,00"
+            },
+            "quina": {
+                "ganhadores": "90",
+                "valorPago": "R$ 45.937,77"
+            },
+            "quadra": {
+                "ganhadores": "6404",
+                "valorPago": "R$ 922,28"
+            }
+        },
+        "arrecadacaoTotal": "R$ 71.708.665,50",
+        "proximoConcurso": {
+            "data": "01/01/2999",
+            "valorEstimado": "99.999.999,00"
+        },
+        "valorAcumuladoFinalCinco": "2.030.190,42",
+        "valorAcumuladoMegaVirada": "2.208.593,74"
+    },
+    {
+        "numero": "2541",
+        "data": "2/10/2022",
+        "cidade": "SÃO PAULO, SP",
+        "local": "SÃO PAULO, SP",
+        "valorAcumulado": "R$ 43.978.243,89",
+        "dezenas": [
+            "10",
+            "28",
+            "45",
+            "47",
+            "57",
+            "59"
+        ],
+        "premiacao": {
+            "sena": {
+                "ganhadores": "0",
+                "valorPago": "R$ 0,00"
+            },
+            "quina": {
+                "ganhadores": "51",
+                "valorPago": "R$ 55.525,68"
+            },
+            "quadra": {
+                "ganhadores": "3793",
+                "valorPago": "R$ 1.066,55"
+            }
+        },
+        "arrecadacaoTotal": "R$ 49.116.033,00",
+        "proximoConcurso": {
+            "data": "01/01/2999",
+            "valorEstimado": "99.999.999,00"
+        },
+        "valorAcumuladoFinalCinco": "2.030.190,42",
+        "valorAcumuladoMegaVirada": "2.208.593,74"
+    },
+    {
+        "numero": "2542",
+        "data": "4/10/2022",
+        "cidade": "SÃO PAULO, SP",
+        "local": "SÃO PAULO, SP",
+        "valorAcumulado": "R$ 49.768.134,07",
+        "dezenas": [
+            "12",
+            "20",
+            "22",
+            "25",
+            "26",
+            "55"
+        ],
+        "premiacao": {
+            "sena": {
+                "ganhadores": "0",
+                "valorPago": "R$ 0,00"
+            },
+            "quina": {
+                "ganhadores": "74",
+                "valorPago": "R$ 42.474,10"
+            },
+            "quadra": {
+                "ganhadores": "5246",
+                "valorPago": "R$ 855,91"
+            }
+        },
+        "arrecadacaoTotal": "R$ 54.514.890,00",
+        "proximoConcurso": {
+            "data": "01/01/2999",
+            "valorEstimado": "99.999.999,00"
+        },
+        "valorAcumuladoFinalCinco": "2.030.190,42",
+        "valorAcumuladoMegaVirada": "2.208.593,74"
+    },
+    {
+        "numero": "2543",
+        "data": "6/10/2022",
+        "cidade": "SÃO PAULO, SP",
+        "local": "SÃO PAULO, SP",
+        "valorAcumulado": "R$ 57.312.877,49",
+        "dezenas": [
+            "02",
+            "05",
+            "27",
+            "30",
+            "46",
+            "53"
+        ],
+        "premiacao": {
+            "sena": {
+                "ganhadores": "0",
+                "valorPago": "R$ 0,00"
+            },
+            "quina": {
+                "ganhadores": "138",
+                "valorPago": "R$ 29.679,12"
+            },
+            "quadra": {
+                "ganhadores": "7475",
+                "valorPago": "R$ 782,74"
+            },
+        },
+        "arrecadacaoTotal": "R$ 71.037.765,00",
+        "proximoConcurso": {
+            "data": "01/01/2999",
+            "valorEstimado": "99.999.999,00"
+        },
+        "valorAcumuladoFinalCinco": "2.030.190,42",
+        "valorAcumuladoMegaVirada": "2.208.593,74"
+    },
+    {
+        "numero": "2544",
+        "data": "3/10/2022",
+        "cidade": "SÃO PAULO,  SP",
+        "local": "SÃO PAULO,  SP",
+        "valorAcumulado": "R$ 86.943.251,69",
+        "dezenas": [
+            "25",
+            "38",
+            "45",
+            "53",
+            "55",
+            "56"
+        ],
+        "premiacao": {
+            "sena": {
+                "ganhadores": "0",
+                "valorPago": "R$ 0,00"
+            },
+            "quina": {
+                "ganhadores": "71",
+                "valorPago": "R$ 61.889,52"
+            },
+            "quadra": {
+                "ganhadores": "6119",
+                "valorPago": "R$ 1.025,88"
+            }
+        },
+        "arrecadacaoTotal": "R$ 76.213.998,00",
+        "proximoConcurso": {
+            "data": "01/01/2999",
+            "valorEstimado": "99.999.999,00"
+        },
+        "valorAcumuladoFinalCinco": "2.030.190,42",
+        "valorAcumuladoMegaVirada": "2.208.593,74"
+    },
+    {
+        "numero": "2545",
+        "data": "6/11/2022",
+        "cidade": "SÃO PAULO, SP",
+        "local": "SÃO PAULO, SP",
+        "valorAcumulado": "R$ 98.539.178,55",
+        "dezenas": [
+            "20",
+            "23",
+            "32",
+            "36",
+            "39",
+            "57"
+        ],
+        "premiacao": {
+            "sena": {
+                "ganhadores": "0",
+                "valorPago": "R$ 0,00"
+            },
+            "quina": {
+                "ganhadores": "94",
+                "valorPago": "R$ 66.967,36"
+            },
+            "quadra": {
+                "ganhadores": "8855",
+                "valorPago": "R$ 1.015,55"
+            }
+        },
+        "arrecadacaoTotal": "R$ 109.181.808,00",
+        "proximoConcurso": {
+            "data": "01/01/2999",
+            "valorEstimado": "99.999.999,00"
+        },
+        "valorAcumuladoFinalCinco": "2.030.190,42",
+        "valorAcumuladoMegaVirada": "2.208.593,74"
+    },
+    {
+        "numero": "2546",
+        "data": "3/11/2022",
+        "cidade": "SÃO PAULO, SP",
+        "local": "SÃO PAULO, SP",
+        "valorAcumulado": "R$ 110.174.385,36",
+        "dezenas": [
+            "03",
+            "23",
+            "28",
+            "34",
+            "38",
+            "48"
+        ],
+        "premiacao": {
+            "sena": {
+                "ganhadores": "0",
+                "valorPago": "R$ 0,00"
+            },
+            "quina": {
+                "ganhadores": "128",
+                "valorPago": "R$ 49.345,74"
+            },
+            "quadra": {
+                "ganhadores": "9138",
+                "valorPago": "R$ 987,43"
+            }
+        },
+        "arrecadacaoTotal": "R$ 109.551.649,50",
+        "proximoConcurso": {
+            "data": "01/01/2999",
+            "valorEstimado": "99.999.999,00"
+        },
+        "valorAcumuladoFinalCinco": "2.030.190,42",
+        "valorAcumuladoMegaVirada": "2.208.593,74"
+    },
+    {
+        "numero": "2547",
+        "data": "6/11/2022",
+        "cidade": "SÃO PAULO, SP",
+        "local": "SÃO PAULO, SP",
+        "valorAcumulado": "R$ 122.289.764,56",
+        "dezenas": [
+            "10",
+            "25",
+            "31",
+            "37",
+            "38",
+            "57"
+        ],
+        "premiacao": {
+            "sena": {
+                "ganhadores": "0",
+                "valorPago": "R$ 0,00"
+            },
+            "quina": {
+                "ganhadores": "100",
+                "valorPago": "R$ 65.769,20"
+            },
+            "quadra": {
+                "ganhadores": "8588",
+                "valorPago": "R$ 1.094,03"
+            }
+        },
+        "arrecadacaoTotal": "R$ 114.072.727,50",
+        "proximoConcurso": {
+            "data": "01/01/2999",
+            "valorEstimado": "99.999.999,00"
+        },
+        "valorAcumuladoFinalCinco": "2.030.190,42",
+        "valorAcumuladoMegaVirada": "2.208.593,74"
+    },
+    {
+        "numero": "2548",
+        "data": "3/11/2022",
+        "cidade": "SÃO PAULO, SP",
+        "local": "SÃO PAULO, SP",
+        "valorAcumulado": "R$ 0,00",
+        "dezenas": [
+            "09",
+            "15",
+            "23",
+            "25",
+            "29",
+            "30"
+        ],
+        "premiacao": {
+            "sena": {
+                "ganhadores": "1",
+                "valorPago": "R$ 134.811.174,29"
+            },
+            "quina": {
+                "ganhadores": "186",
+                "valorPago": "R$ 36.544,82"
+            },
+            "quadra": {
+                "ganhadores": "12011",
+                "valorPago": "R$ 808,46"
+            }
+        },
+        "arrecadacaoTotal": "R$ 117.895.720,50",
+        "proximoConcurso": {
+            "data": "01/01/2999",
+            "valorEstimado": "99.999.999,00"
+        },
+        "valorAcumuladoFinalCinco": "2.030.190,42",
+        "valorAcumuladoMegaVirada": "2.208.593,74"
+    },
+    {
+        "numero": "2549",
+        "data": "6/11/2022",
+        "cidade": "SÃO PAULO,   SP",
+        "local": "SÃO PAULO,   SP",
+        "valorAcumulado": "R$ 173.509.265,45",
+        "dezenas": [
+            "01",
+            "06",
+            "10",
+            "30",
+            "33",
+            "35"
+        ],
+        "premiacao": {
+            "sena": {
+                "ganhadores": "0",
+                "valorPago": "R$ 0,00"
+            },
+            "quina": {
+                "ganhadores": "107",
+                "valorPago": "R$ 22.867,86"
+            },
+            "quadra": {
+                "ganhadores": "5232",
+                "valorPago": "R$ 668,10"
+            }
+        },
+        "arrecadacaoTotal": "R$ 42.439.333,50",
+        "proximoConcurso": {
+            "data": "01/01/2999",
+            "valorEstimado": "99.999.999,00"
+        },
+        "valorAcumuladoFinalCinco": "2.030.190,42",
+        "valorAcumuladoMegaVirada": "2.208.593,74"
+    },
+    {
+        "numero": "2550",
+        "data": "6/11/2022",
+        "cidade": "SÃO PAULO,  SP",
+        "local": "SÃO PAULO,  SP",
+        "valorAcumulado": "R$ 0,00",
+        "dezenas": [
+            "04",
+            "05",
+            "10",
+            "34",
+            "58",
+            "59"
+        ],
+        "premiacao": {
+            "sena": {
+                "ganhadores": "5",
+                "valorPago": "R$ 108.393.993,26"
+            },
+            "quina": {
+                "ganhadores": "2485",
+                "valorPago": "R$ 45.438,78"
+            },
+            "quadra": {
+                "ganhadores": "183921",
+                "valorPago": "R$ 877,04"
+            }
+        },
+        "arrecadacaoTotal": "R$ 1.958.449.342,50",
+        "proximoConcurso": {
+            "data": "01/01/2999",
+            "valorEstimado": "99.999.999,00"
+        },
+        "valorAcumuladoFinalCinco": "2.030.190,42",
+        "valorAcumuladoMegaVirada": "2.208.593,74"
+    },
+    {
+        "numero": "2551",
+        "data": "3/0/2023",
+        "cidade": "SÃO PAULO, SP",
+        "local": "SÃO PAULO, SP",
+        "valorAcumulado": "R$ 3.241.276,43",
+        "dezenas": [
+            "01",
+            "25",
+            "29",
+            "43",
+            "46",
+            "48"
+        ],
+        "premiacao": {
+            "sena": {
+                "ganhadores": "0",
+                "valorPago": "R$ 0,00"
+            },
+            "quina": {
+                "ganhadores": "49",
+                "valorPago": "R$ 35.909,19"
+            },
+            "quadra": {
+                "ganhadores": "2428",
+                "valorPago": "R$ 1.035,27"
+            }
+        },
+        "arrecadacaoTotal": "R$ 30.518.338,50",
+        "proximoConcurso": {
+            "data": "01/01/2999",
+            "valorEstimado": "99.999.999,00"
+        },
+        "valorAcumuladoFinalCinco": "2.030.190,42",
+        "valorAcumuladoMegaVirada": "2.208.593,74"
+    },
 ];
-
-function retornarJsonCompleto() {
-    return jsonObj;
-}
-
-function retornaJsonCustomizado() {
-    let novoObjeto = [];
-
-    jsonObj.forEach(element => {
-        let {
-            numero, dezenas, premiacao, arrecadacaoTotal, data
-        }
-
-            = element;
-
-        novoObjeto.push({
-            numero, dezenas, premiacao, arrecadacaoTotal, data
-        });
-    });
-    return novoObjeto;
-}
