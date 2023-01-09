@@ -1,7 +1,7 @@
 let numeros = [];
 
 $(() => {
-   // preencherCartelaNumerica();
+    // preencherCartelaNumerica();
 })
 
 
@@ -31,8 +31,8 @@ function marcarNumero(obj) {
         numeros.splice(numeros.indexOf(valor), 1);
         removerChip(valor);
         $(`#${valor}`).toggleClass("selecionado");
-    } else if (numeros.length == 15) {
-        alert("Selecionar no max 15 números ... ");
+    } else if (numeros.length == 20) {
+        alert("Selecionar no max 20 números ... ");
     } else {
         numeros.push(valor);
         adicionaChip(valor);
@@ -138,34 +138,49 @@ function infosDoJogo() {
     $("#numerosSelecionados").text("Números: " + num);
     switch (num) {
         case 6:
-            $("#valorDoJogo").text("Valor do Jogo: " + "R$ 3,50");
+            $("#valorDoJogo").text("Valor do Jogo: " + "R$ 4,50");
             break;
         case 7:
-            $("#valorDoJogo").text("Valor do Jogo: " + "R$ 24,50");
+            $("#valorDoJogo").text("Valor do Jogo: " + "R$ 31,50");
             break;
         case 8:
-            $("#valorDoJogo").text("Valor do Jogo: " + "R$ 98,50");
+            $("#valorDoJogo").text("Valor do Jogo: " + "R$ 126");
             break;
         case 9:
-            $("#valorDoJogo").text("Valor do Jogo: " + "R$ 294,00");
+            $("#valorDoJogo").text("Valor do Jogo: " + "R$ 378,00");
             break;
         case 10:
-            $("#valorDoJogo").text("Valor do Jogo: " + "R$ 735,00");
+            $("#valorDoJogo").text("Valor do Jogo: " + "R$ 945,00");
             break;
         case 11:
-            $("#valorDoJogo").text("Valor do Jogo: " + "R$ 1,617,00");
+            $("#valorDoJogo").text("Valor do Jogo: " + "R$ 2,079,00");
             break;
         case 12:
-            $("#valorDoJogo").text("Valor do Jogo: " + "R$ 3.234,00");
+            $("#valorDoJogo").text("Valor do Jogo: " + "R$ 4.128");
             break;
         case 13:
-            $("#valorDoJogo").text("Valor do Jogo: " + "R$ 6.006,00");
+            $("#valorDoJogo").text("Valor do Jogo: " + "R$ 7.722");
             break;
         case 14:
-            $("#valorDoJogo").text("Valor do Jogo: " + "R$ 10.510,50");
+            $("#valorDoJogo").text("Valor do Jogo: " + "R$ 13.513,50");
             break;
         case 15:
-            $("#valorDoJogo").text("Valor do Jogo: " + "R$ 17.517,50");
+            $("#valorDoJogo").text("Valor do Jogo: " + "R$ 22.522,50");
+            break;
+        case 16:
+            $("#valorDoJogo").text("Valor do Jogo: " + "R$ 36.036,00");
+            break;
+        case 17:
+            $("#valorDoJogo").text("Valor do Jogo: " + "R$ 55.692,00");
+            break;
+        case 18:
+            $("#valorDoJogo").text("Valor do Jogo: " + "R$ 83.538");
+            break;
+        case 19:
+            $("#valorDoJogo").text("Valor do Jogo: " + "R$ 122.094");
+            break;
+        case 20:
+            $("#valorDoJogo").text("Valor do Jogo: " + "R$ 174.420");
             break;
         default:
             break;

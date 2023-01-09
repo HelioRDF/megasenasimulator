@@ -69,7 +69,8 @@ function buscarResultado(concurso) {
         },
         "valorAcumuladoFinalCinco": "2.030.190,42",
         "valorAcumuladoMegaVirada": "2.208.593,74"
-    }).then((obj) => console.log("\n",JSON.stringify(obj),","))
+    }).then((obj) => console.log("\n", JSON.stringify(obj), ","))
+   //console.log("\n", obj, ","))
 }
 
 
